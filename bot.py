@@ -13,7 +13,7 @@ if __name__ == '__main__':
     for extension in initial_extensions:
         bot.load_extension(extension)#
 
-@bot.event
+@bot.event #h
 async def on_ready():
     print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}')
     await bot.change_presence(activity=Game(name='!info'))
