@@ -134,10 +134,10 @@ class Music(commands.Cog, name='Music'):
              embed.add_field(name='Artist : ',value=artist1,inline=True)
              embed.set_footer(text='New features coming soon...')
              await ctx.send('Checkout now playing section', delete_after=5.0)
-             await ctx.channel.send(embed=embed)
+             await ctx.channel.send(embed=embed,delete_after=6.0)
              song = Music.search(ctx.author.mention,(songname1+' '+artist1))
         else:
-             await ctx.send('`Genre not found`')
+             await ctx.send('`Genre not found`',delete_after=5.0)
 
         if voice and voice.is_connected():
             await voice.move_to(channel)
@@ -153,7 +153,7 @@ class Music(commands.Cog, name='Music'):
         else:
             self.song_queue[ctx.guild].append(song)
             await self.edit_message(ctx)
-
+        await ctx.message.delete()
     @commands.command(aliases=['s'], brief='!song [genre] ( receive a recommendation from Music Sensei for a particular genre. Type !genre for list of genres available.)')
     async def song(self, ctx, *, ge: str):
         channel = ctx.author.voice.channel
@@ -195,6 +195,8 @@ class Music(commands.Cog, name='Music'):
              embed.add_field(name='Spotify link : ',value=link1,inline=True)
              embed.set_footer(text='New features coming soon...')
              await ctx.send(embed=embed)
+             await ctx.message.delete()
+             
     @commands.command(aliases=['p'], brief='!play [play any youtube url/songname]')
     async def play(self, ctx, *, video: str):
         channel = ctx.author.voice.channel
@@ -202,17 +204,17 @@ class Music(commands.Cog, name='Music'):
         print(ctx.author.mention)
         print(video)
         song = Music.search(ctx.author.mention, video)
-
+        await ctx.send('Added to queue checkout now playing section', delete_after=6.0)
         if voice and voice.is_connected():
             await voice.move_to(channel)
         else:
             voice = await channel.connect()     
-
+           
         if not voice.is_playing():
             self.song_queue[ctx.guild] = [song]
             self.message[ctx.guild] = await ctx.send(embed=song['embed'])
             await ctx.message.delete()
-            await ctx.send('Checkout now playing section', delete_after=5.0)
+            
             voice.play(FFmpegPCMAudio(song['source'], **Music.FFMPEG_OPTIONS), after=lambda e: self.play_next(ctx))
             voice.is_playing()
         else:
