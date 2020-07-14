@@ -11,8 +11,7 @@ initial_extensions = [
 
 if __name__ == '__main__':
     for extension in initial_extensions:
-        bot.load_extension(extension)
-
+        bot.load_extension(extension)#
 
 @bot.event
 async def on_ready():
