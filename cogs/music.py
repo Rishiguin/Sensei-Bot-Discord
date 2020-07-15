@@ -70,16 +70,18 @@ class Music(commands.Cog, name='Music'):
                 .add_field(name='Requested by', value=author)
                 .add_field(name='Uploader', value=f"[{info['uploader']}]({info['channel_url']})")
                 .add_field(name="Queue", value=f"No song queued")
-                .set_thumbnail(url=info['thumbnail']))
-
+                .set_thumbnail(url=info['thumbnail'])
+                .set_footer(text=' this is the default music viewer for each music session.',icon_url='https://i.imgur.com/rFvaZrr.png'))
         return {'embed': embed, 'source': info['formats'][0]['url'], 'title': info['title']}
 
     async def edit_message(self, ctx):
+        li=[]
         embed = self.song_queue[ctx.guild][0]['embed']
         content = "\n".join([f"({self.song_queue[ctx.guild].index(i)}) {i['title']}" for i in self.song_queue[ctx.guild][1:]]) if len(self.song_queue[ctx.guild]) > 1 else "No song queued"
         embed.set_field_at(index=3, name="Queue :", value=content, inline=False)
         await self.message[ctx.guild].edit(embed=embed)
-
+        li=[].append(embed)
+        print(li)
     def play_next(self, ctx):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if len(self.song_queue[ctx.guild]) > 1:
@@ -137,7 +139,7 @@ class Music(commands.Cog, name='Music'):
              await ctx.channel.send(embed=embed,delete_after=6.0)
              song = Music.search(ctx.author.mention,(songname1+' '+artist1))
         else:
-             await ctx.send('`Genre not found`',delete_after=5.0)
+             await ctx.send('`❌ Genre/Mood not found, type !genres or !moods for list of genres/moods`',delete_after=6.0)
 
         if voice and voice.is_connected():
             await voice.move_to(channel)
@@ -154,9 +156,10 @@ class Music(commands.Cog, name='Music'):
             self.song_queue[ctx.guild].append(song)
             await self.edit_message(ctx)
         await ctx.message.delete()
+
+
     @commands.command(aliases=['s'], brief='!song [genre] ( receive a recommendation from Music Sensei for a particular genre. Type !genre for list of genres available.)')
     async def song(self, ctx, *, ge: str):
-        channel = ctx.author.voice.channel
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         print(ctx.author.mention)
         list_of_songs=[]
@@ -189,13 +192,15 @@ class Music(commands.Cog, name='Music'):
              artist1=grp[0][1]
              link1=grp[0][2]
              embed = discord.Embed(color=0x9240FF)
-             embed.description = 'Check this song  out '
+             embed.description = 'Check this song  out {}'.format(ctx.author.mention)
              embed.add_field(name='Song : ',value=songname1,inline=True)
              embed.add_field(name='Artist : ',value=artist1,inline=True)
              embed.add_field(name='Spotify link : ',value=link1,inline=True)
              embed.set_footer(text='New features coming soon...')
              await ctx.send(embed=embed)
              await ctx.message.delete()
+        else:
+             await ctx.send('`❌ Genre/Mood not found, type !genres or !moods for list of genres/moods`',delete_after=6.0)
              
     @commands.command(aliases=['p'], brief='!play [play any youtube url/songname]')
     async def play(self, ctx, *, video: str):
@@ -220,6 +225,7 @@ class Music(commands.Cog, name='Music'):
         else:
             self.song_queue[ctx.guild].append(song)
             await self.edit_message(ctx)
+        await ctx.message.delete()
         
     @commands.command(brief='!pause')
     async def pause(self, ctx):

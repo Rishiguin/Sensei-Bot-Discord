@@ -47,8 +47,8 @@ class chat(commands.Cog):
 #                        temp.append(f"{cmd.brief}\n")
 #                if temp:
 #                    embed.add_field(name=f'**{cog} :**', value=f"{'-> '.join(temp)}", inline=False)
-        embed.add_field(name='`!songplay or !sp [genre/mood]`',value='play a song recommended by music sensei',inline=False)
         embed.add_field(name='`!song or !s [genre/mood]`',value='get a song recommended by music sensei along with the spotify link',inline=False)
+        embed.add_field(name='`!songplay or !sp [genre/mood]`',value='play a song recommended by music sensei',inline=False)
         embed.add_field(name='`!genres`',value='get a list of genres that Music Sensei supports',inline=False)
         embed.add_field(name='`!moods`',value='get a list of moods that Music Sensei supports',inline=False)
         embed.add_field(name='`!play [youtube url/song name]`',value='play any song of your choice',inline=False)
@@ -61,19 +61,26 @@ class chat(commands.Cog):
 
     @commands.command(brief='!genres')
     async def genres(self, ctx):
-        embed = Embed(color=0x9240FF, title='List of genres : ')
-        m=[]
+        embed = Embed(color=0x9240FF, title='Genres : ')
+        m=''
+        embed.add_field(name='`!songplay or !sp [genre]` :get a song played of the genre by music sensei',value='Example : !songplay heavymetal',inline=False)
+        embed.add_field(name='`!song or !s [genre]` :get a song recommended of the genre by Music Sensei',value='Example : !song heavymetal',inline=True)
         for i in range(0,len(genres)):
-          embed.add_field(name='`{}`'.format(genres[i]),value='-',inline=True)
-        embed.set_footer(text='more to added soon...')
+          m=m+' `{}`, '.format(genres[i])
+        embed.description=m
+        embed.set_footer(text='more to be added soon...')
         await ctx.message.delete()
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed,delete_after=45.0)
 
     @commands.command(brief='!moods')
     async def moods(self,ctx):
-        embed = Embed(color=0x9240FF, title='List of moods : ')
+        embed = Embed(color=0x9240FF, title='Moods : ')
+        embed.add_field(name='`!songplay or !sp [mood]` :get a song played of the mood by Music Sensei',value='Example : !songplay happy')
+        embed.add_field(name='`!song or !s [mood]` :get a song recommended of the mood by Music Sensei',value='Example : !song happy')
+        n=''
         for i in moods:
-          embed.add_field(name='`{}`'.format(i),value='-',inline=True)
+          n=n+' `{}`, '.format(i)
+        embed.description=n
         embed.set_footer(text='more to added soon...')
         await ctx.message.delete()
         await ctx.send(embed=embed)
