@@ -95,7 +95,7 @@ class Music(commands.Cog, name='Music'):
             run_coroutine_threadsafe(self.message[ctx.guild].delete(), self.bot.loop)
 
 
-    @commands.command(aliases=['sp'], brief='!songplay [genre]')
+    @commands.command(aliases=['sp'], brief='+songplay [genre]')
     async def songplay(self, ctx, *, ge: str):
         channel = ctx.author.voice.channel
         voice = get(self.bot.voice_clients, guild=ctx.guild)
@@ -139,7 +139,7 @@ class Music(commands.Cog, name='Music'):
              await ctx.channel.send(embed=embed,delete_after=6.0)
              song = Music.search(ctx.author.mention,(songname1+' '+artist1))
         else:
-             await ctx.send('`❌ Genre/Mood not found, type !genres or !moods for list of genres/moods`',delete_after=6.0)
+             await ctx.send('`❌ Genre/Mood not found, type +genres or +moods for list of genres/moods`',delete_after=6.0)
 
         if voice and voice.is_connected():
             await voice.move_to(channel)
@@ -158,7 +158,7 @@ class Music(commands.Cog, name='Music'):
         await ctx.message.delete()
 
 
-    @commands.command(aliases=['s'], brief='!song [genre] ( receive a recommendation from Music Sensei for a particular genre. Type !genre for list of genres available.)')
+    @commands.command(aliases=['s'], brief='+song [genre] ( receive a recommendation from Music Sensei for a particular genre. Type +genre for list of genres available.)')
     async def song(self, ctx, *, ge: str):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         print(ctx.author.mention)
@@ -200,9 +200,9 @@ class Music(commands.Cog, name='Music'):
              await ctx.send(embed=embed)
              await ctx.message.delete()
         else:
-             await ctx.send('`❌ Genre/Mood not found, type !genres or !moods for list of genres/moods`',delete_after=6.0)
+             await ctx.send('`❌ Genre/Mood not found, type +genres or +moods for list of genres/moods`',delete_after=6.0)
              
-    @commands.command(aliases=['p'], brief='!play [play any youtube url/songname]')
+    @commands.command(aliases=['p'], brief='+play [play any youtube url/songname]')
     async def play(self, ctx, *, video: str):
         channel = ctx.author.voice.channel
         voice = get(self.bot.voice_clients, guild=ctx.guild)
@@ -227,7 +227,7 @@ class Music(commands.Cog, name='Music'):
             await self.edit_message(ctx)
         await ctx.message.delete()
         
-    @commands.command(brief='!pause')
+    @commands.command(aliases=['resume'],brief='+pause')
     async def pause(self, ctx):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if voice.is_connected():
@@ -239,7 +239,7 @@ class Music(commands.Cog, name='Music'):
                 await ctx.send('⏯️ Music resumed', delete_after=5.0)
                 voice.resume()
 
-    @commands.command(aliases=['pass'], brief='!skip')
+    @commands.command(aliases=['pass'], brief='+skip')
     async def skip(self, ctx):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if voice.is_playing():
@@ -247,7 +247,7 @@ class Music(commands.Cog, name='Music'):
             await ctx.send('⏭️ Music skipped', delete_after=5.0)
             voice.stop()
 
-    @commands.command(brief='!remove')
+    @commands.command(brief='+remove')
     async def remove(self, ctx, *, num: int):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if voice.is_playing():
