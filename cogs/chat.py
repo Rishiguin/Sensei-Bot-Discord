@@ -47,14 +47,14 @@ class chat(commands.Cog):
 #                        temp.append(f"{cmd.brief}\n")
 #                if temp:
 #                    embed.add_field(name=f'**{cog} :**', value=f"{'-> '.join(temp)}", inline=False)
-        embed.add_field(name='`!song or !s [genre/mood]`',value='get a song recommended by music sensei along with the spotify link',inline=False)
-        embed.add_field(name='`!songplay or !sp [genre/mood]`',value='play a song recommended by music sensei',inline=False)
+        embed.add_field(name='`!song or !s [genre/mood]`',value='get a song recommended by Music Sensei along with the Spotify link',inline=False)
+        embed.add_field(name='`!songplay or !sp [genre/mood]`',value='play a song recommended by Music Sensei',inline=False)
         embed.add_field(name='`!genres`',value='get a list of genres that Music Sensei supports',inline=False)
         embed.add_field(name='`!moods`',value='get a list of moods that Music Sensei supports',inline=False)
         embed.add_field(name='`!play [youtube url/song name]`',value='play any song of your choice',inline=False)
         embed.add_field(name='`!pause`',value='pause the music',inline=False)
-        embed.add_field(name='`!skip`',value='skip the current currently plating song',inline=False)
-        embed.add_field(name='`!remove [index in queue]`',value='remove a song from queue',inline=False)
+        embed.add_field(name='`!skip`',value='skip the current currently playing song',inline=False)
+        embed.add_field(name='`!remove [index in queue]`',value='remove a song from the queue',inline=False)
         await ctx.message.delete()
         await ctx.send(embed=embed)
 
