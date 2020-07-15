@@ -15,19 +15,19 @@ class Logger(commands.Cog):
             data = file.read()
             self.guilds = loads(data)
 
-    @commands.command(brief='!log', hidden=True)
+    @commands.command(brief='+log', hidden=True)
     async def log(self, ctx):
         await ctx.message.delete()
         try:
             if self.guilds[str(ctx.guild.id)]:
                 self.guilds[str(ctx.guild.id)] = False
-                await ctx.send("Les logs sont désactivés", delete_after=5.0)
+                await ctx.send("Logs are deactivated", delete_after=5.0)
             else:
                 self.guilds[str(ctx.guild.id)] = True
-                await ctx.send("Les logs sont activés", delete_after=5.0)
+                await ctx.send("Logs are activated", delete_after=5.0)
         except:
             self.guilds[str(ctx.guild.id)] = True
-            await ctx.send("Les logs sont activés", delete_after=5.0)
+            await ctx.send("Logs are activated", delete_after=5.0)
         with open('guilds.json', 'w') as file:
             print(self.guilds)
             file.write(dumps(self.guilds)) 
