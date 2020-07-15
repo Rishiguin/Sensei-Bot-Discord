@@ -57,7 +57,7 @@ class chat(commands.Cog):
         embed.add_field(name='`+skip`',value='skip the current currently playing song',inline=False)
         embed.add_field(name='`+remove [index in queue]`',value='remove a song from the queue',inline=False)
         await ctx.message.delete()
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed)#hello
 
 
     @commands.command(brief='+genres')
