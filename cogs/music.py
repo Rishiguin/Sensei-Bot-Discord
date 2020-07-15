@@ -10,7 +10,7 @@ import spotipy
 import spotipy.util as util
 import sys
 from spotipy.oauth2 import SpotifyClientCredentials
-
+import time
 clm=SpotifyClientCredentials(client_id='8fc65af3d87a44f7b9cd241c4e967e13',client_secret='8015fab9a7384427b4eefa5886403ebf')
 sp=spotipy.Spotify(client_credentials_manager=clm)
 
@@ -160,7 +160,6 @@ class Music(commands.Cog, name='Music'):
 
     @commands.command(aliases=['s'], brief='+song [genre] ( receive a recommendation from Music Sensei for a particular genre. Type +genre for list of genres available.)')
     async def song(self, ctx, *, ge: str):
-        voice = get(self.bot.voice_clients, guild=ctx.guild)
         print(ctx.author.mention)
         list_of_songs=[]
         if ge in items:
@@ -191,7 +190,7 @@ class Music(commands.Cog, name='Music'):
              songname1=grp[0][0]
              artist1=grp[0][1]
              link1=grp[0][2]
-             embed = discord.Embed(color=0x9240FF)
+             embed = discord.Embed(color=0x4400ff)
              embed.description = 'Check this song  out {}'.format(ctx.author.mention)
              embed.add_field(name='Song : ',value=songname1,inline=True)
              embed.add_field(name='Artist : ',value=artist1,inline=True)
@@ -225,8 +224,9 @@ class Music(commands.Cog, name='Music'):
         else:
             self.song_queue[ctx.guild].append(song)
             await self.edit_message(ctx)
+        time.sleep(4)
         await ctx.message.delete()
-        
+       
     @commands.command(aliases=['resume'],brief='+pause')
     async def pause(self, ctx):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
@@ -255,6 +255,13 @@ class Music(commands.Cog, name='Music'):
             await ctx.message.delete()
             await self.edit_message(ctx)
 
+    @commands.command(aliases=['dis','leave','bye'], brief='+disconnect (leaves voice channel currently playing in)')
+    async def disconnect(self, ctx):
+        server = ctx.message.guild.voice_client
+        await ctx.send(':wave: see you later',delete_after=5.0)
+        await server.disconnect()
+        #voice = get(self.bot.voice_clients, guild=ctx.guild)
+        #run_coroutine_threadsafe(voice.disconnect())
 
 def setup(bot):
     bot.add_cog(Music(bot))
