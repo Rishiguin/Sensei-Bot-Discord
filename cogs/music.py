@@ -40,10 +40,40 @@ items={
   'comfort':['37i9dQZF1DWSRc3WJklgBs'],
   'sad':['37i9dQZF1DWVrtsSlLKzro','37i9dQZF1DX3YSRoSdA634'],
   'badass':['37i9dQZF1DX1tyCD9QhIWF'],
-  'angry':['71Xpaq3Hbpxz6w9yDmIsaH']
+  'angry':['71Xpaq3Hbpxz6w9yDmIsaH'],
+  'anime':['37i9dQZF1DX6XceWZP1znY','0Efxy2V32pxFXTRKcA6zpp']
 
 }
-
+gifs={
+  'anime':['https://media.giphy.com/media/dSdSQmzlJopuqueF2i/giphy.gif','https://media.giphy.com/media/1fnu914Z79qQpVi2xZ/giphy.gif','https://media.giphy.com/media/1zgzISaYrnMAYRJJEr/giphy.gif','https://media.giphy.com/media/ORjDJ8ZRAEjPyPhUu2/giphy.gif','https://media.giphy.com/media/ZyFCksxxD9tmLYfGJo/giphy.gif'],
+  'synthwave':['https://media.giphy.com/media/wKnqovL33x9in9ci6X/giphy.gif','https://media.giphy.com/media/hSpRpdP46ETIXXWajD/giphy.gif','https://media.giphy.com/media/h58dtf5vTpjulO4M5o/giphy.gif','https://media.giphy.com/media/RMwccgrk3FvU9G7su4/giphy.gif','https://media.giphy.com/media/vMSXa7KFGx49aeeXhe/giphy.gif','https://media.giphy.com/media/l0MYJAzu5RTVSGeiY/giphy.gif'],
+  'lofi':['https://media.giphy.com/media/j5zqQSABpeHCU8EpO3/giphy.gif','https://media.giphy.com/media/ZyFCksxxD9tmLYfGJo/giphy.gif','https://media.giphy.com/media/1fnu914Z79qQpVi2xZ/giphy.gif','https://media.giphy.com/media/MU56lYT1Ov07fVTsnM/giphy.gif','https://media.giphy.com/media/c9IdCLK8TDv1e/giphy.gif','https://media.giphy.com/media/vMSXa7KFGx49aeeXhe/giphy.gif'],
+  '90s':['https://media.giphy.com/media/OeEVCJ2UqMQNO/giphy.gif','https://media.giphy.com/media/l41m2P3MMhMcmGbYY/giphy.gif','https://media.giphy.com/media/vMSXa7KFGx49aeeXhe/giphy.gif','https://media.giphy.com/media/14iK5HgJO2hJfi/giphy.gif'],
+  'rock':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/VnIoecjQ3caw8/giphy.gif','https://media.giphy.com/media/xThtayqRC9fCEZ9P6U/giphy.gif'],
+  'hiphop':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/14iK5HgJO2hJfi/giphy.gif','https://media.giphy.com/media/J5qQHCpkBiMXsoxDdA/giphy.gif'],
+  'classical':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/26tn9547icxKKsAko/giphy.gif','https://media.giphy.com/media/J5qQHCpkBiMXsoxDdA/giphy.gif'],
+  'epic':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/26tn9547icxKKsAko/giphy.gif'],
+  'r&b':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/MU56lYT1Ov07fVTsnM/giphy.gif','https://media.giphy.com/media/14iK5HgJO2hJfi/giphy.gif','https://media.giphy.com/media/VnIoecjQ3caw8/giphy.gif'],
+  'heavymetal':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/xThtayqRC9fCEZ9P6U/giphy.gif','https://media.giphy.com/media/26tn9547icxKKsAko/giphy.gif'],
+  'jazz':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/26tn9547icxKKsAko/giphy.gif'],
+  'edm':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/xThtayqRC9fCEZ9P6U/giphy.gif','https://media.giphy.com/media/VnIoecjQ3caw8/giphy.gif'],
+  'rap':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/xThtayqRC9fCEZ9P6U/giphy.gif','https://media.giphy.com/media/26tn9547icxKKsAko/giphy.gif'],
+  'metal':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/xThtayqRC9fCEZ9P6U/giphy.gif','https://media.giphy.com/media/26tn9547icxKKsAko/giphy.gif'],
+  'funk':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/VnIoecjQ3caw8/giphy.gif'],
+  'gaming':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/ORjDJ8ZRAEjPyPhUu2/giphy.gif','https://media.giphy.com/media/l0MYJAzu5RTVSGeiY/giphy.gif'],
+  'kpop':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/26tn9547icxKKsAko/giphy.gif'],
+  'bollywood':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/26tn9547icxKKsAko/giphy.gif','https://media.giphy.com/media/WtgwBP21Gujtu/giphy.gif'],
+  'random':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/26tn9547icxKKsAko/giphy.gif','https://media.giphy.com/media/WtgwBP21Gujtu/giphy.gif'],
+  'sleep':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/26tn9547icxKKsAko/giphy.gif','https://media.giphy.com/media/3o6ZsWqOrPRbtQoHG8/giphy.gif'],
+  'focus':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/VnIoecjQ3caw8/giphy.gif','https://media.giphy.com/media/3o6ZsWqOrPRbtQoHG8/giphy.gif','https://media.giphy.com/media/l0MYQUIaqh223Ij8Q/giphy.gif'],
+  'happy':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/VnIoecjQ3caw8/giphy.gif','https://media.giphy.com/media/RMwccgrk3FvU9G7su4/giphy.gif','https://media.giphy.com/media/l0MYQUIaqh223Ij8Q/giphy.gif'],
+  'alone':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/ORjDJ8ZRAEjPyPhUu2/giphy.gif','https://media.giphy.com/media/3o6ZsWqOrPRbtQoHG8/giphy.gif'],
+  'comfort':['https://media.giphy.com/media/3gTmgzy7wYJfyaGRHQ/giphy.gif','https://media.giphy.com/media/d2NfTnGMMBT8ORweXA/giphy.gif','https://media.giphy.com/media/ORjDJ8ZRAEjPyPhUu2/giphy.gif'],
+  'sad':['https://media.giphy.com/media/d2NfTnGMMBT8ORweXA/giphy.gif','https://media.giphy.com/media/UUHUfrG6NsXzG/source.gif','https://media.giphy.com/media/ORjDJ8ZRAEjPyPhUu2/giphy.gif'],
+  'badass':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/RMwccgrk3FvU9G7su4/giphy.gif','https://media.giphy.com/media/26tn9547icxKKsAko/giphy.gif','https://media.giphy.com/media/WtgwBP21Gujtu/giphy.gif'],
+  'angry':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://media.giphy.com/media/RMwccgrk3FvU9G7su4/giphy.gif','https://media.giphy.com/media/26tn9547icxKKsAko/giphy.gif','https://media.giphy.com/media/WtgwBP21Gujtu/giphy.gif'],
+  'allr':['https://media.giphy.com/media/l44QvKoQuUD3xPZKg/giphy.gif','https://tenor.com/9Tma.gif','https://media.giphy.com/media/xThtayqRC9fCEZ9P6U/giphy.gif','https://media.giphy.com/media/3o6ZsWqOrPRbtQoHG8/giphy.gif','https://media.giphy.com/media/WtgwBP21Gujtu/giphy.gif','https://media.giphy.com/media/3o7WILxziMaugB5Va8/giphy.gif','https://media.giphy.com/media/ei4OKs5ft9bmfkKSAk/giphy.gif','https://media.giphy.com/media/RMwccgrk3FvU9G7su4/giphy.gif','https://media.giphy.com/media/l0MYQUIaqh223Ij8Q/giphy.gif']
+}
 
 class Music(commands.Cog, name='Music'):
     YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist':'True'}
@@ -62,29 +92,36 @@ class Music(commands.Cog, name='Music'):
         return f'{h:d}:{m:02d}:{s:02d}'
 
     @staticmethod
-    def search(author, arg):
+    def search(author, arg,x):
         with YoutubeDL(Music.YDL_OPTIONS) as ydl:
             try: requests.get(arg)
             except: info = ydl.extract_info(f"ytsearch:{arg}", download=False)['entries'][0]
             else: info = ydl.extract_info(arg, download=False)
-
-        embed = (Embed(title='🎵 Now playing :', description=f"[{info['title']}]({info['webpage_url']})", color=0x9240FF)
-                .add_field(name='Duration', value=Music.parse_duration(info['duration']))
-                .add_field(name='Requested by', value=author)
-                .add_field(name='Uploader', value=f"[{info['uploader']}]({info['channel_url']})")
-                .add_field(name="Queue", value=f"No song queued")
-                .set_thumbnail(url=info['thumbnail'])
-                .set_footer(text=' this is the default music viewer for each music session.',icon_url='https://i.imgur.com/rFvaZrr.png'))
-        return {'embed': embed, 'source': info['formats'][0]['url'], 'title': info['title']}
+        try:
+         embed = (Embed(title='🎵 Now playing :', description=f"[{info['title']}]({info['webpage_url']})", color=0x9240FF)
+                    .add_field(name='Duration', value=Music.parse_duration(info['duration']))
+                    .add_field(name='Requested by', value=author)
+                    .add_field(name='Uploader', value=f"[{info['uploader']}]({info['channel_url']})")
+                    .add_field(name="Queue", value=f"No song queued",inline=False)
+                    .add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=False)
+                    .set_image(url=f'{x}')
+                    .set_thumbnail(url=info['thumbnail'])
+                    .set_footer(text=' this is the default music viewer for each music session.',icon_url='https://i.imgur.com/rFvaZrr.png'))
+         return {'embed': embed, 'source': info['formats'][0]['url'], 'title': info['title']}
+        except Exception as e:
+            print(e)
 
     async def edit_message(self, ctx):
         li=[]
-        embed = self.song_queue[ctx.guild][0]['embed']
-        content = "\n".join([f"({self.song_queue[ctx.guild].index(i)}) {i['title']}" for i in self.song_queue[ctx.guild][1:]]) if len(self.song_queue[ctx.guild]) > 1 else "No song queued"
-        embed.set_field_at(index=3, name="Queue :", value=content, inline=False)
-        await self.message[ctx.guild].edit(embed=embed)
-        li=[].append(embed)
-        print(li)
+        try:
+         embed = self.song_queue[ctx.guild][0]['embed']
+         content = "\n".join([f"({self.song_queue[ctx.guild].index(i)}) {i['title']}" for i in self.song_queue[ctx.guild][1:]]) if len(self.song_queue[ctx.guild]) > 1 else "No song queued"
+         embed.set_field_at(index=3, name="Queue :", value=content, inline=False)
+         await self.message[ctx.guild].edit(embed=embed)
+         li=[].append(embed)
+         print(li)
+        except Exception as e:
+            print(e)
     def play_next(self, ctx):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if len(self.song_queue[ctx.guild]) > 1:
@@ -100,10 +137,18 @@ class Music(commands.Cog, name='Music'):
 
     @commands.command(aliases=['sp'], brief='+songplay [genre]')
     async def songplay(self, ctx, *, ge: str):
+        ur=''
         channel = ctx.author.voice.channel
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         print(ctx.author.mention)
         list_of_songs=[]
+        if ge in gifs:
+            gli=gifs[ge]
+            ur=gli[random.randint(0,len(gli)-1)]
+            print(ur)
+        else:
+            gli='allr'
+            ur=gli[random.randint(0,len(gli)-1)]
         if ge in items:
           
              pli=items[ge]
@@ -142,7 +187,7 @@ class Music(commands.Cog, name='Music'):
              embed.set_footer(text='New features coming soon...')
              await ctx.send('Checkout now playing section', delete_after=5.0)
              await ctx.channel.send(embed=embed,delete_after=6.0)
-             song = Music.search(ctx.author.mention,(songname1+' '+artist1))
+             song = Music.search(ctx.author.mention,(songname1+' '+artist1),ur)
         else:
              await ctx.send('`❌ Genre/Mood not found, type +genres or +moods for list of genres/moods`',delete_after=6.0)
 
@@ -211,10 +256,15 @@ class Music(commands.Cog, name='Music'):
     @commands.command(aliases=['p'], brief='+play [play any youtube url/songname]')
     async def play(self, ctx, *, video: str):
         channel = ctx.author.voice.channel
+        gli='allr'
+        ur=gifs[gli][random.randint(0,len(gifs[gli])-1)]
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         print(ctx.author.mention)
         print(video)
-        song = Music.search(ctx.author.mention, video)
+        try :
+         song = Music.search(ctx.author.mention, video,ur)
+        except:
+            song=Music.search(ctx.author.mention, video,ur)
         await ctx.send('Added to queue checkout now playing section', delete_after=6.0)
         if voice and voice.is_connected():
             await voice.move_to(channel)
@@ -234,7 +284,7 @@ class Music(commands.Cog, name='Music'):
         time.sleep(4)
         await ctx.message.delete()
        
-    @commands.command(aliases=['resume'],brief='+pause')
+    @commands.command(aliases=['resume'],brief='+resume')
     async def pause(self, ctx):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if voice.is_connected():
@@ -245,6 +295,12 @@ class Music(commands.Cog, name='Music'):
             else:
                 await ctx.send('⏯️ Music resumed', delete_after=5.0)
                 voice.resume()
+
+    @commands.command(aliases=['emb'],brief='+embed')
+    async def embed(self, ctx):
+         embed=discord.Embed(color=0x4400ff)
+         embed.set_image(url='https://media.giphy.com/media/j5zqQSABpeHCU8EpO3/giphy.gif')
+         await ctx.send(embed=embed)
 
     @commands.command(aliases=['pass'], brief='+skip')
     async def skip(self, ctx):
