@@ -23,6 +23,7 @@ genres=[
   'focus',
   'kpop',
   'bollywood',
+  'anime',
   'random',
   'sleep'
 ]
