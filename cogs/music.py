@@ -17,27 +17,30 @@ sp=spotipy.Spotify(client_credentials_manager=clm)
 items={
   'rock':['37i9dQZF1DWXRqgorJj26U'],
   'hiphop':['1tIioq32KjWlt5vvk5rhqX'],
-  'classicalindian':['5tX4GrnMulZfRUN49zxkW1'],
   'classical':['37i9dQZF1DWV0gynK7G6pD'],
+  'epic':['3djwi67c1QC3MQlVlRMlc7'],
   'r&b':['37i9dQZF1DX2UgsUIg75Vg','37i9dQZF1DX7yRWDZJQ3Yz','37i9dQZF1DWYmmr74INQlb'],
+  'synthwave':['5GBJpEiKMiFy3cBPKR2TaH','3gWAZPuNWpELIhKNbnpfwk'], 
   'heavymetal':['37i9dQZF1DX9qNs32fujYe'],
   'jazz':['37i9dQZF1DXbITWG1ZJKYt'],
   'edm':['3Di88mvYplBtkDBIzGLiiM','5Y9eVQ3u5rBAfL61OmsvDZ'],
   'rap':['1k2kVgwVqQknegkmpXEA17','37i9dQZF1DX0XUsuxWHRQd'],
+  'metal':['37i9dQZF1DWTcqUzwhNmKv'],
+  '90s':['37i9dQZF1DWXqpDKK4ed9O'],
   'funk':['4nmgmuVJSMDit2bpRNVDO2'],
   'lofi':['37i9dQZF1DWWQRwui0ExPn'],
   'gaming':['37i9dQZF1DWTyiBJ6yEqeu'],
-  'C418':['37i9dQZF1DZ06evO2DcVFr','37i9dQZF1E4keRh2SuErl0'],
   'kpop':['37i9dQZF1DWTY99d0AYptp','37i9dQZF1DX2cVoXMHpaD1'],
   'bollywood':['37i9dQZF1DXd8cOUiye1o2','37i9dQZF1DX0XUfTFmNBRM'],
   'random':['1PIhV6X7PV4TjAQb7unitN','37i9dQZEVXbLiRSasKsNU9'],
   'sleep':['37i9dQZF1DWZd79rJ6a7lp'],
-
+  'focus':['37i9dQZF1DWZeKCadgRdKQ','37i9dQZF1DWXLeA8Omikj7'],
   'happy':['37i9dQZF1DX3rxVfibe1L0','37i9dQZF1DX9XIFQuFvzM4'],
   'alone':['37i9dQZF1DWX83CujKHHOn','37i9dQZF1DX2pSTOxoPbx9'],
   'comfort':['37i9dQZF1DWSRc3WJklgBs'],
   'sad':['37i9dQZF1DWVrtsSlLKzro','37i9dQZF1DX3YSRoSdA634'],
-  'badass':['37i9dQZF1DX1tyCD9QhIWF']
+  'badass':['37i9dQZF1DX1tyCD9QhIWF'],
+  'angry':['71Xpaq3Hbpxz6w9yDmIsaH']
 
 }
 
@@ -133,7 +136,9 @@ class Music(commands.Cog, name='Music'):
              embed = discord.Embed(color=0x9240FF)
              embed.description = 'Adding this song to queue - '
              embed.add_field(name='Song : ',value=songname1,inline=True)
-             embed.add_field(name='Artist : ',value=artist1,inline=True)
+             embed.add_field(name='Artist : ',value=artist1,inline=False)
+             embed.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
+             embed.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
              embed.set_footer(text='New features coming soon...')
              await ctx.send('Checkout now playing section', delete_after=5.0)
              await ctx.channel.send(embed=embed,delete_after=6.0)
@@ -194,7 +199,9 @@ class Music(commands.Cog, name='Music'):
              embed.description = 'Check this song  out {}'.format(ctx.author.mention)
              embed.add_field(name='Song : ',value=songname1,inline=True)
              embed.add_field(name='Artist : ',value=artist1,inline=True)
-             embed.add_field(name='Spotify link : ',value=link1,inline=True)
+             embed.add_field(name='Spotify link : ',value=link1,inline=False)
+             embed.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
+             embed.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
              embed.set_footer(text='New features coming soon...')
              await ctx.send(embed=embed)
              await ctx.message.delete()

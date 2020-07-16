@@ -56,7 +56,7 @@ class Logger(commands.Cog):
             elif ('ValueError' or 'KeyError') in str(error):
                 msg = 'Some arguments are invalid!'
             elif 'Missing Permissions' in str(error):
-                msg = "Je n'ai pas la permission de faire ça !"
+                msg = "I don't have permission to do this !"
             else:
                 print(str(error))
                 return
@@ -65,8 +65,9 @@ class Logger(commands.Cog):
             return
  
         embed = Embed(title="❌ Something went wrong:", description=msg, color=0xe74c3c)
+        embed.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
         await ctx.message.delete()
-        await ctx.send(embed=embed, delete_after=5.0)
+        await ctx.send(embed=embed, delete_after=7.0)
 
     @commands.Cog.listener()
     async def on_command_completion(self, ctx):

@@ -7,7 +7,10 @@ from requests import get
 genres=[
   'rock',
   'hiphop',
-  'classicalindian',
+  'metal',
+  'epic',
+  'synthwave'
+  '90s'
   'classical',
   'r&b',
   'heavymetal',
@@ -17,7 +20,7 @@ genres=[
   'funk',
   'lofi',
   'gaming',
-  'C418',
+  'focus',
   'kpop',
   'bollywood',
   'random',
@@ -28,6 +31,7 @@ moods=[
     'alone',
     'comfort',
     'sad',
+    'angry',
     'badass'
 ]
 class chat(commands.Cog):
@@ -56,6 +60,9 @@ class chat(commands.Cog):
         embed.add_field(name='`+resume`',value='resume the music',inline=False)
         embed.add_field(name='`+skip`',value='skip the current currently playing song',inline=False)
         embed.add_field(name='`+remove [index in queue]`',value='remove a song from the queue',inline=False)
+        embed.add_field(name='`+bye`',value='leaves voice channel',inline=False)
+        embed.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
+        embed.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
         await ctx.message.delete()
         await ctx.send(embed=embed)#hello
 
