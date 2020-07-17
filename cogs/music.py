@@ -17,7 +17,7 @@ sp=spotipy.Spotify(client_credentials_manager=clm)
 items={
   'rock':['37i9dQZF1DWXRqgorJj26U'],
   'hiphop':['1tIioq32KjWlt5vvk5rhqX'],
-  'classical':['37i9dQZF1DWV0gynK7G6pD'],
+  'classical':['37i9dQZF1DWV0gynK7G6pD'],#info
   'epic':['3djwi67c1QC3MQlVlRMlc7'],
   'r&b':['37i9dQZF1DX2UgsUIg75Vg','37i9dQZF1DX7yRWDZJQ3Yz','37i9dQZF1DWYmmr74INQlb'],
   'synthwave':['5GBJpEiKMiFy3cBPKR2TaH','3gWAZPuNWpELIhKNbnpfwk'], 
