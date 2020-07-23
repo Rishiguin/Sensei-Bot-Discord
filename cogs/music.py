@@ -11,6 +11,7 @@ import spotipy.util as util
 import sys
 from spotipy.oauth2 import SpotifyClientCredentials
 import time
+from discord import Spotify
 clm=SpotifyClientCredentials(client_id='8fc65af3d87a44f7b9cd241c4e967e13',client_secret='8015fab9a7384427b4eefa5886403ebf')
 sp=spotipy.Spotify(client_credentials_manager=clm)
 
@@ -318,6 +319,78 @@ class Music(commands.Cog, name='Music'):
             await ctx.message.delete()
             await self.edit_message(ctx)
 
+    @commands.command(brief='+spotify [@member]')
+    async def spotify(self,ctx, user: discord.Member=None):
+        user = user or ctx.author
+        k=0
+        for activity in user.activities:
+            if isinstance(activity, Spotify):
+                k=k+1
+                await ctx.send(f"{user} is listening to {activity.title} by {activity.artist}")
+        if(k==0):
+            await ctx.send("User is not listening to anything on Spotify.")
+    @commands.command(aliases=['l'],brief='+listening [song/artist]')
+    async def listening(self,ctx,arso: str):
+        q=ctx.message.content.strip().lower()
+        n=[]
+        ns=0
+        for i in ctx.guild.members:
+            for activity in i.activities:
+                if isinstance(activity,Spotify):
+                   ns+=1
+                   if((q in activity.title.lower()) or (q in activity.artist.lower())):
+                    n.append([f'{i}',f'{activity.title}',f'{activity.artist}'])
+        print(n)
+        if(ns==0):
+            await ctx.send('No one in this server is listening to songs on Spotify right now.')
+        else:
+          if(ns==1):
+              pre='person is'
+          else:
+              pre='people are'
+          embed = discord.Embed(color=0x4400ff)
+          embed.description=(str(ns)+f' {pre} '+'listening to songs on Spotify in this server right now')
+          embed.add_field(name=f'No of people listeing to {q} : ',value=len(n),inline=False)
+          if(len(n)==0):
+              await ctx.send(embed=embed)
+          else:
+              for item in n:
+                  user=item[0]
+                  name=item[1]
+                  artist=item[2]
+                  embed.add_field(name='Member :',value=f'{user}',inline=True)
+                  embed.add_field(name='Listening to :',value=f'{name} by {artist}',inline=True)
+              await ctx.send(embed=embed)
+    @commands.command(aliases=['la'],brief='+listeningall')
+    async def listeningall(self,ctx):
+        n=[]
+        ns=0
+        for i in ctx.guild.members:
+            for activity in i.activities:
+                if isinstance(activity,Spotify):
+                   ns+=1
+                   n.append([f'{i}',f'{activity.title}',f'{activity.artist}'])
+        print(n)
+        if(ns==0):
+            await ctx.send('No one in this server is listening to songs on Spotify right now.')
+        else:
+          if(ns==1):
+              pre='person is'
+          else:
+              pre='people are'
+          embed = discord.Embed(color=0x4400ff)
+          embed.description=(str(ns)+f' {pre} '+'listening to songs on Spotify in this server right now')
+          if(len(n)==0):
+              await ctx.send(embed=embed)
+          else:
+              for item in n:
+                  user=item[0]
+                  name=item[1]
+                  artist=item[2]
+                  embed.add_field(name=(f'{user}'+' is listening to '),value=f'{name} by {artist}',inline=False)
+              await ctx.send(embed=embed)
+
+       
     @commands.command(aliases=['dis','leave','bye'], brief='+disconnect (leaves voice channel currently playing in)')
     async def disconnect(self, ctx):
         server = ctx.message.guild.voice_client

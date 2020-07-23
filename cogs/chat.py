@@ -54,6 +54,8 @@ class chat(commands.Cog):
 #                    embed.add_field(name=f'**{cog} :**', value=f"{'-> '.join(temp)}", inline=False)
         embed.add_field(name='`+song or +s [genre/mood]`',value='get a song recommended by Music Sensei along with the Spotify link',inline=False)
         embed.add_field(name='`+songplay or +sp [genre/mood]`',value='play a song recommended by Music Sensei',inline=False)
+        embed.add_field(name='`+listening [song/artist]`',value='Get a list of all the people in your server listening to that song/artist',inline=False)
+        embed.add_field(name='`+listeningall or +la`',value='Get a list of all the members in your server currently listening to songs',inline=False)
         embed.add_field(name='`+genres`',value='get a list of genres that Music Sensei supports',inline=False)
         embed.add_field(name='`+moods`',value='get a list of moods that Music Sensei supports',inline=False)
         embed.add_field(name='`+play [youtube url/song name]`',value='play any song of your choice',inline=False)
