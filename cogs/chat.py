@@ -1,6 +1,6 @@
 from discord import Embed
 from discord.ext import commands
-
+import requests
 import json
 from requests import get
 
@@ -95,7 +95,47 @@ class chat(commands.Cog):
         embed.set_footer(text='more to added soon...')
         await ctx.message.delete()
         await ctx.send(embed=embed)
+    @commands.command(brief='+urban [word] | (gives the meaning of the word from urban dictionary)')
+    async def urban(self,ctx,word:str):
 
+        embed = Embed(color=0xfcba03, title=f'{word.upper()}')
+
+        url="https://mashape-community-urban-dictionary.p.rapidapi.com/define"
+
+        querystring={"term":f"{word}"}
+        
+        headers = {
+            'x-rapidapi-host': "mashape-community-urban-dictionary.p.rapidapi.com",
+            'x-rapidapi-key': "4506e5dc85msh57cad0977206ed3p1e19e7jsn0f0af8f6be4e"
+            }
+
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        data = json.loads(response.text)
+        
+        embed.add_field(name='Definitions : ',value='_______________',inline=False)
+        for i in range (0,2):
+         try:
+           d=data['list'][i]['definition'].replace('[','').replace(']','')
+           print(d)
+           embed.add_field(name=f'{i+1}.',value=d, inline=False)
+         except Exception as e:
+           print (e)
+           continue
+
+        embed.add_field(name='Examples : ',value='___________',inline=False)
+
+        for i in range (0,2):
+         try:
+           d=data['list'][i]['example'].replace('[','').replace(']','')
+           print(d)
+           embed.add_field(name=f'{i+1}.',value=d, inline=False)
+         except Exception as e:
+           print (e)
+           continue
+        await ctx.send(embed=embed)
+        
+
+        
 #    @commands.command(brief='+poll [question] [answers]')
 #    async def poll(self, ctx, *items):
 #        question = items[0]
