@@ -96,7 +96,9 @@ class chat(commands.Cog):
         await ctx.message.delete()
         await ctx.send(embed=embed)
     @commands.command(brief='+urban [word] | (gives the meaning of the word from urban dictionary)')
-    async def urban(self,ctx,word:str):
+    async def urban(self,ctx):
+        word1 = ctx.message.content.replace('+urban','')
+        word  =word1.strip().lower()
 
         embed = Embed(color=0xfcba03, title=f'{word.upper()}')
 
