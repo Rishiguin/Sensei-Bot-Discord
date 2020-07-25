@@ -138,6 +138,7 @@ class chat(commands.Cog):
 
     @commands.command(brief='~ideapls')
     async def idea(self,ctx):
+        import time
         embed = Embed(color=0xF5A623)  
         e2 = Embed(color=0xC52430)
         e2.set_author(name='Thinking',icon_url='https://media.giphy.com/media/xTkcEQACH24SMPxIQg/giphy.gif') 
