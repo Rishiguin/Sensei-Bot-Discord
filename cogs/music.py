@@ -331,7 +331,7 @@ class Music(commands.Cog, name='Music'):
             await ctx.send("User is not listening to anything on Spotify.")
     @commands.command(aliases=['l'],brief='+listening [song/artist]')
     async def listening(self,ctx,arso: str):
-        q=ctx.message.content.strip().lower()
+        q=ctx.message.content.replace('+listening','').strip().lower()
         n=[]
         ns=0
         for i in ctx.guild.members:

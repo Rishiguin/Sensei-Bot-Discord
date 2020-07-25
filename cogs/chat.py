@@ -135,7 +135,13 @@ class chat(commands.Cog):
            print (e)
            continue
         await ctx.send(embed=embed)
-        
+
+    @commands.command(brief='+idea')
+    async def idea(self,ctx):
+        embed = Embed(color=0x9240FF, title='Moods : ')  
+        res=requests.get(url='http://itsthisforthat.com/api.php?text')
+        adv=res.text
+        await ctx.send(text=adv)
 
         
 #    @commands.command(brief='+poll [question] [answers]')
