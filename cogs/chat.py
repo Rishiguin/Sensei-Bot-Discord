@@ -136,12 +136,17 @@ class chat(commands.Cog):
            continue
         await ctx.send(embed=embed)
 
-    @commands.command(brief='+idea')
+    @commands.command(brief='~ideapls')
     async def idea(self,ctx):
-        embed = Embed(color=0x9240FF, title='Moods : ')  
+        embed = Embed(color=0xF5A623)  
+        e2 = Embed(color=0xC52430)
+        e2.set_author(name='Thinking',icon_url='https://media.giphy.com/media/xTkcEQACH24SMPxIQg/giphy.gif') 
+        msg = await ctx.send(embed=e2)
+        time.sleep(2)
         res=requests.get(url='http://itsthisforthat.com/api.php?text')
         adv=res.text
-        await ctx.send(text=adv)
+        embed.description='I have an idea. '+adv
+        await msg.edit(embed=embed)
 
         
 #    @commands.command(brief='+poll [question] [answers]')
