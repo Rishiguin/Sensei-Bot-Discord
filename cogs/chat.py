@@ -149,6 +149,24 @@ class chat(commands.Cog):
         embed.description='I have an idea. '+adv
         await msg.edit(embed=embed)
 
+    @commands.command(brief='+joke')
+    async def joke(self,ctx):
+      import time
+      d=requests.get('https://sv443.net/jokeapi/v2/joke/Any?type=twopart')
+      req=d.json()
+      print(req)
+
+      setup=req['setup']
+      deli=req['delivery']
+  
+      embed = Embed(color=0xfffb00, title=setup)
+      e2 = Embed(color=0x42c42b, title=deli)
+      embed.set_author(name='Sensei',icon_url='https://media.giphy.com/media/xT39DdjfMcxiu1lwk0/giphy.gif')
+      e2.set_author(name='Sensei',icon_url='https://media.giphy.com/media/xT39DdjfMcxiu1lwk0/giphy.gif')
+      msg= await ctx.send(embed=embed)
+      time.sleep(6)
+      await msg.edit(embed=e2)
+
         
 #    @commands.command(brief='+poll [question] [answers]')
 #    async def poll(self, ctx, *items):
