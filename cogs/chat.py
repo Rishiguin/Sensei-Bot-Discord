@@ -3,6 +3,7 @@ from discord.ext import commands
 import requests
 import json
 from requests import get
+from cogs.malware import mal
 
 genres=[
   'rock',
@@ -149,6 +150,7 @@ class chat(commands.Cog):
         embed.description='I have an idea. '+adv
         await msg.edit(embed=embed)
 
+
     @commands.command(brief='+joke')
     async def joke(self,ctx):
       import time
@@ -166,6 +168,22 @@ class chat(commands.Cog):
       msg= await ctx.send(embed=embed)
       time.sleep(6)
       await msg.edit(embed=e2)
+
+
+
+    @command.commands(brief='+scanurl')
+    async def scanurl(self,ctx):
+      url=ctx.message.content.replace('+scanurl','').strip()
+      if not url.startswith('https://'):
+        embed = Embed(title="❌ Enter a valid url", color=0xe74c3c)
+        await ctx.send(embed=embed)
+      else:
+        e=mal(url)
+        e2 = Embed(color=0xC52430)
+        e2.set_author(name='Processing...',icon_url='https://media.giphy.com/media/5th8zFFsvNOuM6nGsq/giphy.gif') 
+        msg = await ctx.send(embed=e2)
+        time.sleep(3)
+        await msg.edit(embed=e)
  #  @commands.command()
  #  
  #   from OTXv2 import OTXv2
