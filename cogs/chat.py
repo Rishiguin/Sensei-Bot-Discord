@@ -171,8 +171,9 @@ class chat(commands.Cog):
 
 
 
-    @command.commands(brief='+scanurl')
+    @commands.command(brief='+scanurl')
     async def scanurl(self,ctx):
+      import time
       url=ctx.message.content.replace('+scanurl','').strip()
       if not url.startswith('https://'):
         embed = Embed(title="❌ Enter a valid url", color=0xe74c3c)

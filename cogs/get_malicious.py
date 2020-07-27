@@ -133,3 +133,16 @@ def file(otx, hash):
         alerts.append({'suricata': suricata})
 
     return alerts
+
+#alerts = url(otx,'https://www.google.com/search?q=hex+color+picker&rlz=1C1CHBD_enIN907IN907&oq=hex+color+picker&aqs=chrome.0.35i39j0l7.3868j0j4&sourceid=chrome&ie=UTF-8')
+#if len(alerts) > 0:
+#    emb = Embed(color=0xff0400)
+#    emb.title='Identified as potentially malicious'
+#    emb.set_footer(text="Powered by Alienware OTX",icon_url='https://imgur.com/a/FnskW4D')
+#    #return(emb)
+#   # print(str(alerts))
+#else:
+#    print('Not identified as malicious')
+#    emb = Embed(color=0x00ff1e)
+#    emb.title='Not identified as malicious'
+#    emb.set_footer(text="Powered by Alienware OTX",icon_url='https://imgur.com/a/FnskW4D')
