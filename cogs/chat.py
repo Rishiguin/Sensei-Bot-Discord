@@ -166,25 +166,56 @@ class chat(commands.Cog):
       msg= await ctx.send(embed=embed)
       time.sleep(6)
       await msg.edit(embed=e2)
-
-        
-#    @commands.command(brief='+poll [question] [answers]')
-#    async def poll(self, ctx, *items):
-#        question = items[0]
-#        answers = '\n'.join(items[1:])
-#        embed = Embed(title='Nouveaux sondage :', description=f":grey_question: __{question}__", color=0x3498db)
-#        embed.set_footer(text=f'Asked by {ctx.author}')
-#        for i in range(1, len(items)):
-#            embed.add_field(name=f"Option n°{i}", value=items[i], inline=False)
-#        await ctx.message.delete()
-#        message = await ctx.channel.send(embed=embed)
-#        reactions = ['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣']
-#
-#        for i in range(len(items[1:])):
-#            await message.add_reaction(reactions[i])
-
-#    @commands.command(brief='+meme')
-#    async def meme(self, ctx):
+ #  @commands.command()
+ #  
+ #   from OTXv2 import OTXv2
+ #   import argparse
+ #   import get_malicious 
+ #   import hashlib
+ #   
+ #   
+ #   # Your API key
+ #    API_KEY = '75ba4a2b23d77731e9890a9d1b548f4d99f80d132739c74c0d12af7839c2e02d'
+ #    OTX_SERVER = 'https://otx.alienvault.com/'
+ #    otx = OTXv2(API_KEY, server=OTX_SERVER)
+ #    
+ #    parser = argparse.ArgumentParser(description='OTX CLI Example')
+ #    parser.add_argument('-ip', help='IP eg; 4.4.4.4', required=False)
+ #    parser.add_argument('-host',
+ #                        help='Hostname eg; www.alienvault.com', required=False)
+ #    parser.add_argument(
+ #        '-url', help='URL eg; http://www.alienvault.com', required=False)
+ #    parser.add_argument(
+ #        '-hash', help='Hash of a file eg; 7b42b35832855ab4ff37ae9b8fa9e571', required=False)
+ #    parser.add_argument(
+ #        '-file', help='Path to a file, eg; malware.exe', required=False)
+ #    
+ #    args = vars(parser.parse_args())
+ #    
+ #    u=input("Enter url :")
+ #    alerts = get_malicious.url(otx,u)
+ #    if len(alerts) > 0:
+ #        print('Identified as potentially malicious')
+ #        print(str(alerts))
+ #    else:
+ #        print('Not identified as malicious')
+ #  #     @commands.command(brief='+poll [question] [answers]')
+   #     async def poll(self, ctx, *items):
+   #         question = items[0]
+#         answers = '\n'.join(items[1:])
+#         embed = Embed(title='Nouveaux sondage :', description=f":grey_question: __{question}__", color=0x3498db)
+#         embed.set_footer(text=f'Asked by {ctx.author}')
+#         for i in range(1, len(items)):
+#             embed.add_field(name=f"Option n°{i}", value=items[i], inline=False)
+#         await ctx.message.delete()
+#         message = await ctx.channel.send(embed=embed)
+#         reactions = ['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣']
+# 
+#         for i in range(len(items[1:])):
+#             await message.add_reaction(reactions[i])
+ 
+#     @commands.command(brief='+meme')
+#     async def meme(self, ctx):
 #        data = get('https://meme-api.herokuapp.com/gimme').json()
 #        embed = (Embed(title=f":speech_balloon: r/{data['subreddit']} :", color=0x9240FF)
 #                .set_image(url=data['url'])

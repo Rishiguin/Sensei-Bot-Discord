@@ -329,6 +329,13 @@ class Music(commands.Cog, name='Music'):
                 await ctx.send(f"{user} is listening to {activity.title} by {activity.artist}")
         if(k==0):
             await ctx.send("User is not listening to anything on Spotify.")
+            
+    @commands.command(aliases=['dis','leave','bye'], brief='+disconnect (leaves voice channel currently playing in)')
+    async def disconnect(self, ctx):
+        server = ctx.message.guild.voice_client
+        await ctx.send(':wave: see you later',delete_after=5.0)
+        await server.disconnect()
+
     @commands.command(aliases=['l'],brief='+listening [song/artist]')
     async def listening(self,ctx,arso: str):
         q=ctx.message.content.replace('+listening','').strip().lower()
@@ -391,11 +398,7 @@ class Music(commands.Cog, name='Music'):
               await ctx.send(embed=embed)
 
        
-    @commands.command(aliases=['dis','leave','bye'], brief='+disconnect (leaves voice channel currently playing in)')
-    async def disconnect(self, ctx):
-        server = ctx.message.guild.voice_client
-        await ctx.send(':wave: see you later',delete_after=5.0)
-        await server.disconnect()
+
         #voice = get(self.bot.voice_clients, guild=ctx.guild)
         #run_coroutine_threadsafe(voice.disconnect())
 
