@@ -41,6 +41,9 @@ class chat(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
+
+
+
     @commands.command(brief='+info')
     async def info(self, ctx):
         k=0
@@ -71,6 +74,9 @@ class chat(commands.Cog):
         await ctx.send(embed=embed)#hello
 
 
+
+
+
     @commands.command(brief='+genres')
     async def genres(self, ctx):
         embed = Embed(color=0x9240FF, title='Genres : ')
@@ -84,6 +90,9 @@ class chat(commands.Cog):
         await ctx.message.delete()
         await ctx.send(embed=embed,delete_after=45.0)
 
+
+
+
     @commands.command(brief='+moods')
     async def moods(self,ctx):
         embed = Embed(color=0x9240FF, title='Moods : ')
@@ -96,6 +105,10 @@ class chat(commands.Cog):
         embed.set_footer(text='more to added soon...')
         await ctx.message.delete()
         await ctx.send(embed=embed)
+
+
+
+
     @commands.command(brief='+urban [word] | (gives the meaning of the word from urban dictionary)')
     async def urban(self,ctx):
         #print(ctx.message.content)
@@ -135,6 +148,9 @@ class chat(commands.Cog):
            continue
         await ctx.send(embed=embed)
 
+
+
+
     @commands.command(brief='+idea')
     async def idea(self,ctx):
         print(ctx.message.content)
@@ -148,6 +164,8 @@ class chat(commands.Cog):
         adv=res.text
         embed.description='I have an idea. '+adv
         await msg.edit(embed=embed)
+
+
 
 
     @commands.command(brief='+joke')
@@ -168,6 +186,9 @@ class chat(commands.Cog):
       time.sleep(6)
       await msg.edit(embed=e2)
 
+
+
+
     @commands.command(brief='+scanurl')
     async def scanurl(self,ctx):
       import time
@@ -184,6 +205,8 @@ class chat(commands.Cog):
         await msg.edit(embed=e)
 
  
+
+
     @commands.command(brief='+poll [question] [answers]')
     async def poll(self, ctx, *items):
          question = items[0]     
@@ -199,6 +222,9 @@ class chat(commands.Cog):
          for i in range(len(items[1:])):
              await message.add_reaction(reactions[i])
  
+
+
+
     @commands.command(brief='+meme')
     async def meme(self, ctx):
          data = get('https://meme-api.herokuapp.com/gimme').json()
@@ -206,6 +232,9 @@ class chat(commands.Cog):
                  .set_image(url=data['url'])
                  .set_footer(text=data['postLink']))
          await ctx.send(embed=embed)
+
+
+
 
     @commands.command(brief='twitch [game] [key-words (optional)]',aliases=['tg','twitch game'])
     async def twitchgame(self, ctx, game, *keys, streams=[]):
@@ -245,6 +274,9 @@ class chat(commands.Cog):
               return
       embed = Embed(title=f"❌ Something went wrong:", description="No streams found", color=0xe74c3c)
       await ctx.send(embed=embed) 
+
+
+
 
 
     @commands.command(brief='twitch [streamer] ',aliases=['ts'])
