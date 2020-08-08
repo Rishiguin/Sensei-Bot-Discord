@@ -3,7 +3,7 @@ from discord.ext import commands
 import requests
 import json
 from requests import get
-from cogs.malware import mal
+import urllib
 
 genres=[
   'rock',
@@ -38,7 +38,7 @@ moods=[
 ]
 class chat(commands.Cog):
     
-    def __init__(self, bot): 
+    def __init__(self, bot):
         self.bot = bot
     
     @commands.command(brief='+info')
@@ -98,9 +98,7 @@ class chat(commands.Cog):
         await ctx.send(embed=embed)
     @commands.command(brief='+urban [word] | (gives the meaning of the word from urban dictionary)')
     async def urban(self,ctx):
-        word1 = ctx.message.content.replace('+urban','')
-        word  =word1.strip().lower()
-
+        #print(ctx.message.content)
         embed = Embed(color=0xfcba03, title=f'{word.upper()}')
 
         url="https://mashape-community-urban-dictionary.p.rapidapi.com/define"
@@ -137,8 +135,9 @@ class chat(commands.Cog):
            continue
         await ctx.send(embed=embed)
 
-    @commands.command(brief='~ideapls')
+    @commands.command(brief='+idea')
     async def idea(self,ctx):
+        print(ctx.message.content)
         import time
         embed = Embed(color=0xF5A623)  
         e2 = Embed(color=0xC52430)
@@ -169,8 +168,6 @@ class chat(commands.Cog):
       time.sleep(6)
       await msg.edit(embed=e2)
 
-
-
     @commands.command(brief='+scanurl')
     async def scanurl(self,ctx):
       import time
@@ -185,87 +182,121 @@ class chat(commands.Cog):
         msg = await ctx.send(embed=e2)
         time.sleep(3)
         await msg.edit(embed=e)
- #  @commands.command()
- #  
- #   from OTXv2 import OTXv2
- #   import argparse
- #   import get_malicious 
- #   import hashlib
- #   
- #   
- #   # Your API key
- #    API_KEY = '75ba4a2b23d77731e9890a9d1b548f4d99f80d132739c74c0d12af7839c2e02d'
- #    OTX_SERVER = 'https://otx.alienvault.com/'
- #    otx = OTXv2(API_KEY, server=OTX_SERVER)
- #    
- #    parser = argparse.ArgumentParser(description='OTX CLI Example')
- #    parser.add_argument('-ip', help='IP eg; 4.4.4.4', required=False)
- #    parser.add_argument('-host',
- #                        help='Hostname eg; www.alienvault.com', required=False)
- #    parser.add_argument(
- #        '-url', help='URL eg; http://www.alienvault.com', required=False)
- #    parser.add_argument(
- #        '-hash', help='Hash of a file eg; 7b42b35832855ab4ff37ae9b8fa9e571', required=False)
- #    parser.add_argument(
- #        '-file', help='Path to a file, eg; malware.exe', required=False)
- #    
- #    args = vars(parser.parse_args())
- #    
- #    u=input("Enter url :")
- #    alerts = get_malicious.url(otx,u)
- #    if len(alerts) > 0:
- #        print('Identified as potentially malicious')
- #        print(str(alerts))
- #    else:
- #        print('Not identified as malicious')
- #  #     @commands.command(brief='+poll [question] [answers]')
-   #     async def poll(self, ctx, *items):
-   #         question = items[0]
-#         answers = '\n'.join(items[1:])
-#         embed = Embed(title='Nouveaux sondage :', description=f":grey_question: __{question}__", color=0x3498db)
-#         embed.set_footer(text=f'Asked by {ctx.author}')
-#         for i in range(1, len(items)):
-#             embed.add_field(name=f"Option n°{i}", value=items[i], inline=False)
-#         await ctx.message.delete()
-#         message = await ctx.channel.send(embed=embed)
-#         reactions = ['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣']
-# 
-#         for i in range(len(items[1:])):
-#             await message.add_reaction(reactions[i])
- 
-#     @commands.command(brief='+meme')
-#     async def meme(self, ctx):
-#        data = get('https://meme-api.herokuapp.com/gimme').json()
-#        embed = (Embed(title=f":speech_balloon: r/{data['subreddit']} :", color=0x9240FF)
-#                .set_image(url=data['url'])
-#                .set_footer(text=data['postLink']))
-#        await ctx.send(embed=embed)
 
-#    @commands.command(brief='twitch [game] [key-words (optional)]')
-#    async def twitch(self, ctx, game, *keys, streams=[]):
-#        headers = {
-#            'Client-ID': "j3abopdoj1fi9hshxtli9jlnkyruof",
-#            'Authorization':  "skwhgj2gzbf6aeae84hedfzb1b2hyp"
-#        }
-#        topgames = get(f"https://api.twitch.tv/helix/games/top?first=100", headers=headers).json()
-#        for category in topgames['data']:
-#            if game.lower() in category['name'].lower():
-#                embed = Embed(title=f":desktop: Streams ({category['name']}):", color=0x3498db)
-#                stream_nb = 100 if keys else 20
-#                response = get(f"https://api.twitch.tv/helix/streams?game_id={category['id']}&first={stream_nb}", headers=headers).json()
-#                for stream in response['data']:
-#                    if keys:
-#                        for key in keys:
-#                            if key.lower() in stream['title'].lower() and not stream in streams:
-#                                streams.append(stream)
-#                                embed.add_field(name=f"{stream['user_name']}", value=f"[{stream['title']}](https://twitch.tv/{stream['user_name']})")
-#                    else:
-#                        embed.add_field(name=f"{stream['user_name']}", value=f"[{stream['title']}](https://twitch.tv/{stream['user_name']})")
-#                await ctx.send(embed=embed)
-#                return
-#        embed = Embed(title=f"❌ Something went wrong:", description="No matching streams found", color=0xe74c3c)
-#        await ctx.send(embed=embed) 
+ 
+    @commands.command(brief='+poll [question] [answers]')
+    async def poll(self, ctx, *items):
+         question = items[0]     
+         answers = '\n'.join(items[1:])
+         embed = Embed(title='Poll :', description=f"__{question}__", color=0x3498db)
+         embed.set_footer(text=f'Asked by {ctx.author}')
+         for i in range(1, len(items)):
+             embed.add_field(name=f"{i}", value=items[i], inline=False)
+         #await ctx.message.delete()
+         message = await ctx.channel.send(embed=embed)
+         reactions = ['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣']
+ 
+         for i in range(len(items[1:])):
+             await message.add_reaction(reactions[i])
+ 
+    @commands.command(brief='+meme')
+    async def meme(self, ctx):
+         data = get('https://meme-api.herokuapp.com/gimme').json()
+         embed = (Embed(title=f":speech_balloon: r/{data['subreddit']} :", color=0x9240FF)
+                 .set_image(url=data['url'])
+                 .set_footer(text=data['postLink']))
+         await ctx.send(embed=embed)
+
+    @commands.command(brief='twitch [game] [key-words (optional)]',aliases=['tg','twitch game'])
+    async def twitchgame(self, ctx, game, *keys, streams=[]):
+      CLIENT_ID = 'j3abopdoj1fi9hshxtli9jlnkyruof'
+      CLIENT_SECRET='ybud1f2qvv2u89s8ue8wpsdb7f88pc'
+      
+      def make_request(URL):
+         header    = {"Client-ID": CLIENT_ID, "Authorization": f"Bearer {get_access_token()}" }
+         req  = urllib.request.Request(URL, headers=header)
+         recv = urllib.request.urlopen(req)
+         print(recv)
+         return json.loads(recv.read().decode("utf-8"))
+
+      def get_access_token():  
+          
+          x = requests.post(f"https://id.twitch.tv/oauth2/token?client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&grant_type=client_credentials")
+          print(x.text)
+          print(json.loads(x.text)["access_token"])
+          return json.loads(x.text)["access_token"]
+
+      topgames = make_request(f"https://api.twitch.tv/helix/games/top?first=100")
+      print(topgames)
+      for category in topgames['data']:
+          if game.lower() in category['name'].lower():
+              embed = Embed(title=f"Streams ({category['name']}):", color=0x9834eb)
+              stream_nb = 100 if keys else 20
+              response = make_request(f"https://api.twitch.tv/helix/streams?game_id={category['id']}&first={stream_nb}")
+              for stream in response['data']:
+                  if keys:
+                      for key in keys:
+                          if key.lower() in stream['title'].lower() and not stream in streams:
+                              streams.append(stream)
+                              embed.add_field(name=f"{stream['user_name']}", value=f"[{stream['title']}](https://twitch.tv/{stream['user_name']})")
+                  else:
+                      embed.add_field(name=f"{stream['user_name']}", value=f"[{stream['title']}](https://twitch.tv/{stream['user_name']})")
+              await ctx.send(embed=embed)
+              return
+      embed = Embed(title=f"❌ Something went wrong:", description="No streams found", color=0xe74c3c)
+      await ctx.send(embed=embed) 
+
+
+    @commands.command(brief='twitch [streamer] ',aliases=['ts'])
+    async def twitchstreamer(self, ctx, streamer):
+      print(streamer)
+      CLIENT_ID = 'j3abopdoj1fi9hshxtli9jlnkyruof'
+      CLIENT_SECRET='ybud1f2qvv2u89s8ue8wpsdb7f88pc'
+      
+      def make_request(URL):
+
+         header    = {"Client-ID": CLIENT_ID, "Authorization": f"Bearer {get_access_token()}" }
+         req  = urllib.request.Request(URL, headers=header)
+         recv = urllib.request.urlopen(req)
+         print(recv)
+         return json.loads(recv.read().decode("utf-8"))
+
+      def get_access_token():  
+          
+          x = requests.post(f"https://id.twitch.tv/oauth2/token?client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&grant_type=client_credentials")
+          print(x.text)
+          print(json.loads(x.text)["access_token"])
+          return json.loads(x.text)["access_token"]
+
+      streamers = make_request(f"https://api.twitch.tv/helix/search/channels?query={streamer.replace(' ','').lower().strip()}")
+      streamer=streamers['data'][0]
+      embed=Embed(color=0x9834eb)
+      try:
+         embed.title=streamer['display_name']
+         thumb_url=streamer['thumbnail_url']
+         embed.set_thumbnail(url=thumb_url)
+         embed.add_field(name='Streamer id : ',value='{}'.format(streamer['id']),inline=False)
+         if(streamer['is_live']==True):
+           embed.add_field(name='Live now : ',value='✅',inline=False)
+           embed.add_field(name='Watch live : ',value=f"[{streamer['title']}](https://twitch.tv/{streamer['display_name']})",inline=False)
+           embed.add_field(name='Started at : ',value=f"{streamer['started_at'].replace('T',' ').replace('Z',' UTC')}",inline=False)
+         else:
+           embed.add_field(name='Live now : ',value='❌',inline=False)
+         await ctx.send(embed=embed)
+      except Exception as e:
+       print(e)
+       embed = Embed(title=f"❌ Something went wrong:", description="No streamers found", color=0xe74c3c)
+       await ctx.send(embed=embed) 
+
+
+
+
+
+
 
 
 def setup(bot):
     bot.add_cog(chat(bot))
+
+
+# %%
