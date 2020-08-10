@@ -206,13 +206,23 @@ class Music(commands.Cog, name='Music'):
         if not voice.is_playing():
             self.song_queue[ctx.guild] = [song]
             self.message[ctx.guild] = await ctx.send(embed=song['embed'])
-            await ctx.message.delete()
+            try:
+             await ctx.message.delete()
+            except:
+              pass
+
+
             voice.play(FFmpegPCMAudio(song['source'], **Music.FFMPEG_OPTIONS), after=lambda e: self.play_next(ctx))
             voice.is_playing()
         else:
             self.song_queue[ctx.guild].append(song)
             await self.edit_message(ctx)
-        await ctx.message.delete()
+        try:
+             await ctx.message.delete()
+        except:
+               pass
+   
+
 
     @commands.command(aliases=['s'], brief='+song [genre] ( receive a recommendation from Music Sensei for a particular genre. Type +genre for list of genres available.)')
     async def song(self, ctx, *, ge: str):
@@ -255,7 +265,12 @@ class Music(commands.Cog, name='Music'):
              embed.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
              embed.set_footer(text='New features coming soon...')
              await ctx.send(embed=embed)
-             await ctx.message.delete()
+             try:
+               await ctx.message.delete()
+             except:
+               pass
+   
+
         else:
              await ctx.send('`❌ Genre/Mood not found, type +genres or +moods for list of genres/moods`',delete_after=6.0)
              
@@ -281,7 +296,12 @@ class Music(commands.Cog, name='Music'):
         if not voice.is_playing():
             self.song_queue[ctx.guild] = [song]
             self.message[ctx.guild] = await ctx.send(embed=song['embed'])
-            await ctx.message.delete()
+            try:
+               await ctx.message.delete()
+            except:
+                pass
+   
+
             
             voice.play(FFmpegPCMAudio(song['source'], **Music.FFMPEG_OPTIONS), after=lambda e: self.play_next(ctx))
             voice.is_playing()
@@ -289,13 +309,23 @@ class Music(commands.Cog, name='Music'):
             self.song_queue[ctx.guild].append(song)
             await self.edit_message(ctx)
         time.sleep(4)
-        await ctx.message.delete()
+        try:
+             await ctx.message.delete()
+        except:
+               pass
+   
+
        
     @commands.command(aliases=['resume'],brief='+resume')
     async def pause(self, ctx):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if voice.is_connected():
-            await ctx.message.delete()
+            try:
+              await ctx.message.delete()
+            except:
+               pass
+   
+
             if voice.is_playing():
                 await ctx.send('⏸️ Music paused', delete_after=5.0)
                 voice.pause()
@@ -313,7 +343,12 @@ class Music(commands.Cog, name='Music'):
     async def skip(self, ctx):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if voice.is_playing():
-            await ctx.message.delete()
+            try:
+              await ctx.message.delete()
+            except:
+               pass
+   
+
             await ctx.send('⏭️ Music skipped', delete_after=5.0)
             voice.stop()
 
@@ -322,7 +357,12 @@ class Music(commands.Cog, name='Music'):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if voice.is_playing():
             del self.song_queue[ctx.guild][num]
-            await ctx.message.delete()
+            try:
+               await ctx.message.delete()
+            except:
+               pass
+   
+
             await self.edit_message(ctx)
 
     @commands.command(brief='+spotify [@member]')
