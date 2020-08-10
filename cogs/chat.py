@@ -58,12 +58,12 @@ class chat(commands.Cog):
 #                        temp.append(f"{cmd.brief}\n")
 #                if temp:
 #                    embed.add_field(name=f'**{cog} :**', value=f"{'-> '.join(temp)}", inline=False)
-        embed.add_field(name='`+song or +s [genre/mood]`',value='get a song recommended by Music Sensei along with the Spotify link',inline=False)
-        embed.add_field(name='`+songplay or +sp [genre/mood]`',value='play a song recommended by Music Sensei',inline=False)
+        embed.add_field(name='`+song or +s [genre/mood]`',value='get a song recommended by Sensei along with the Spotify link',inline=False)
+        embed.add_field(name='`+songplay or +sp [genre/mood]`',value='play a song recommended by Sensei',inline=False)
         embed.add_field(name='`+listening [song/artist]`',value='Get a list of all the people in your server listening to that song/artist',inline=False)
         embed.add_field(name='`+listeningall or +la`',value='Get a list of all the members in your server currently listening to songs',inline=False)
-        embed.add_field(name='`+genres`',value='get a list of genres that Music Sensei supports',inline=False)
-        embed.add_field(name='`+moods`',value='get a list of moods that Music Sensei supports',inline=False)
+        embed.add_field(name='`+genres`',value='get a list of genres that Sensei supports',inline=False)
+        embed.add_field(name='`+moods`',value='get a list of moods that Sensei supports',inline=False)
         embed.add_field(name='`+play [youtube url/song name]`',value='play any song of your choice',inline=False)
         embed.add_field(name='`+pause`',value='pause the music',inline=False)
         embed.add_field(name='`+resume`',value='resume the music',inline=False)
@@ -114,6 +114,7 @@ class chat(commands.Cog):
     @commands.command(brief='+urban [word] | (gives the meaning of the word from urban dictionary)')
     async def urban(self,ctx):
         #print(ctx.ctx.message.content)
+        word=ctx.message.content.replace('s-urban ','').strip()
         embed = Embed(color=0xfcba03, title=f'{word.upper()}')
 
         url="https://mashape-community-urban-dictionary.p.rapidapi.com/define"
@@ -194,7 +195,7 @@ class chat(commands.Cog):
     @commands.command(brief='+scanurl')
     async def scanurl(self,ctx):
       import time
-      url=ctx.message.content.replace('+scanurl','').strip()
+      url=ctx.message.content.replace('s-scanurl','').strip()
       if not url.startswith('https://'):
         embed = Embed(title="❌ Enter a valid url", color=0xe74c3c)
         await ctx.send(embed=embed)
@@ -209,7 +210,7 @@ class chat(commands.Cog):
  
 
 
-    @commands.command(brief='+poll [question] [answers]')
+    @commands.command(brief='+poll ["question"] [answers separated by spaces]')
     async def poll(self, ctx, *items):
          question = items[0]     
          answers = '\n'.join(items[1:])
@@ -454,15 +455,14 @@ class chat(commands.Cog):
           
           #out1.show()
           return('abp_edit.png')
-
-      if (ctx.message.content.startswith('s-makenews')):
-	     text=ctx.message.content.replace('s-makenews ','')
-	     a4=[]
-	     a=news1(text,a4)
-	     if(a=='k'):
-	 	   await ctx.send(f'**Limit : 93 characters**\nRemove {len(text)-93} characters.')
-	     else :
-	         await ctx.send(file=discord.File(a)) 
+      text=ctx.message.content.replace('s-makenews ','')
+      if (ctx.message.content.startswith('s-makenews ')):
+	      a4=[]
+	      a=news1(text,a4)
+	      if (a=='k'):
+	 	       await ctx.send(f'**Limit : 93 characters**\nRemove {len(text)-93} characters.')
+	      else :
+	         await ctx.send(file=discord.File(a))
 
 
 
