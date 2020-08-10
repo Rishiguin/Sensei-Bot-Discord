@@ -8,3 +8,6 @@ dnspython==1.16.0
 spotipy
 requests
 OTXv2
+pyttsx3
+gTTs
+pillow

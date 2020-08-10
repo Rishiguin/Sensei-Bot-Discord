@@ -3,7 +3,9 @@ from discord.ext import commands
 import requests
 import json
 from requests import get
+import discord
 import urllib
+from PIL import Image,ImageFont,ImageDraw,ImageFilter,ImageEnhance
 
 genres=[
   'rock',
@@ -111,7 +113,7 @@ class chat(commands.Cog):
 
     @commands.command(brief='+urban [word] | (gives the meaning of the word from urban dictionary)')
     async def urban(self,ctx):
-        #print(ctx.message.content)
+        #print(ctx.ctx.message.content)
         embed = Embed(color=0xfcba03, title=f'{word.upper()}')
 
         url="https://mashape-community-urban-dictionary.p.rapidapi.com/define"
@@ -319,6 +321,150 @@ class chat(commands.Cog):
        print(e)
        embed = Embed(title=f"❌ Something went wrong:", description="No streamers found", color=0xe74c3c)
        await ctx.send(embed=embed) 
+  
+
+
+    @commands.command(aliases=['help tts'])
+    async def help_tts(self,ctx):
+      emb=Embed(color=0x9240FF)
+      dialects=[
+
+        'f-us;English (US)',
+        'f-in;English (India)',
+        'f-ca;English (Canada)',
+        'f-uk;English (UK)',
+        'f-gb;English (UK)',
+        'f-au;English (Australia)',
+        'f-gh;English (Ghana)',
+        'f-ie;English (Ireland)',
+        'f-nz;English (New Zealand)',
+        'f-ng;English (Nigeria)',
+        'f-ph;English (Philippines)',
+        'f-za;English (South Africa)',
+      ]
+
+      hagf=''
+
+      for d in dialects :
+        d1=d.split(';')
+        print(d1)
+        hagf=hagf+'*{}*'.format(d1[0])+' = '+d1[1]+' \n'
+      print(hagf)
+      emb.title='TTS'
+      emb.description='1. ** +tts [gender] [text] ** \n\n gender: m for male , f for female \n example command : `+tts m hello there` \n\n -(optional) For **female** voice different dialects can be chosen \n\n Dialects : \n {} \n example: `+tts f-in hello there` \n\n **WARNING : Dialects are available only for female voice**'.format(hagf)
+      await ctx.send(embed=emb)
+
+
+
+    @commands.command()
+    async def geturl(self,ctx,emoji: discord.Emoji):
+     await ctx.send(emoji.url) 
+
+    
+    @commands.command()
+    async def makenews(self,ctx):
+      def news1(str2,ary):
+        if len(str2)>93:
+            return('k')
+        else:
+          if(len(str2)>29):
+             ar=str2.split(' ')
+             print(ar)
+             wr=''
+             for ind,i in enumerate(ar):
+                print(i)
+                wr=wr+i+' '
+                if (len(wr) > 28):
+                   if (len(wr) < 29) and ind==len(ar)-1:
+                    ary.append(wr.strip())
+                   ary.append(wr.strip())
+                   print('b : ',ary)
+                   wr=''
+             print('----------------',ary)
+             tf=ary[len(ary)-1]
+             print(tf)
+             inde=str2.find(tf)
+             print(str2[inde+len(tf):])
+             toadd=str2[inde+len(tf):]
+             ary.append(toadd)
+        
+             for ind,w in enumerate(ary):
+                 if len(w)>29: 
+                    inde=w.rfind(' ')
+                    word=w[:inde]
+                    ary[ind]=word
+                    ary.insert(ind+1,w[inde:len(w)])
+                 else:
+                     continue
+          else:
+             ary.append(str2)
+                   
+             print(ary)
+        
+          im=Image.open('abp.png')
+          wid,hei=im.size
+          print('wid ', wid)
+          print('hei ',hei)
+    
+          out=im.convert('RGBA')
+          out.save('abp.png')
+          
+          #time.sleep(20)
+          #os.remove('some_image.jpg')
+         
+          
+    
+         
+          dst=Image.open('abp.png')
+    
+         
+          pointsize = 55
+          fillcolor = "white"
+          shadowcolor = "black"
+    
+          font=ImageFont.truetype('alfaslab.ttf',pointsize)
+          w,h=font.getsize(str2)
+    
+          print('text height ',(h)*len(ary))
+          th=(h)*len(ary)
+          RED_HEIGHT=357
+          RED_WIDTH=810
+          xh=RED_HEIGHT-th
+           
+          xhf=int(xh/2)
+         
+          for ind,i in enumerate(ary):
+           draw=ImageDraw.Draw(dst)
+           w1,h1=font.getsize(i)
+           x,y=(int((810-w1)/2)+80,(190+xhf+(h*ind)+10))
+          # try:
+          #  draw.text((x-1, y-1), i, font=font, fill=shadowcolor)
+          #  draw.text((x+1, y-1), i, font=font, fill=shadowcolor)
+          #  draw.text((x-1, y+1), i, font=font, fill=shadowcolor)
+          #  draw.text((x+1, y+1), i, font=font, fill=shadowcolor)
+          # except:
+          #     pass
+          
+          # now draw the text over it
+           draw.text((x, y), i.strip(), font=font, fill=fillcolor)
+           #
+           #draw.text(((300-w1)/2,((((h/2)+10))*ind)+out1.height-50),i,fill='orange',font=font)
+          d_s=dst.filter(ImageFilter.SMOOTH).filter(ImageFilter.SMOOTH)
+          dst.save('abp_edit.png')
+          
+          #out1.show()
+          return('abp_edit.png')
+
+      if (ctx.message.content.startswith('wmojinews')):
+	     text=ctx.message.content.replace('wmojinews ','')
+	     a4=[]
+	     a=news1(text,a4)
+	     if(a=='k'):
+	 	   await ctx.send(f'**Limit : 93 characters**\nRemove {len(text)-93} characters.')
+	     else :
+	         await ctx.send(file=discord.File(a)) 
+
+
 
 
 

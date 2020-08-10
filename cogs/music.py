@@ -12,6 +12,11 @@ import sys
 from spotipy.oauth2 import SpotifyClientCredentials
 import time
 from discord import Spotify
+
+import os
+from gtts import gTTS
+import pyttsx3
+
 clm=SpotifyClientCredentials(client_id='8fc65af3d87a44f7b9cd241c4e967e13',client_secret='8015fab9a7384427b4eefa5886403ebf')
 sp=spotipy.Spotify(client_credentials_manager=clm)
 
@@ -83,6 +88,7 @@ class Music(commands.Cog, name='Music'):
     def __init__(self, bot):
         self.bot = bot
         self.song_queue = {}
+        self.tts_queue={}
         self.message = {}
 
     @staticmethod
@@ -123,6 +129,7 @@ class Music(commands.Cog, name='Music'):
          print(li)
         except Exception as e:
             print(e)
+
     def play_next(self, ctx):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if len(self.song_queue[ctx.guild]) > 1:
@@ -134,6 +141,19 @@ class Music(commands.Cog, name='Music'):
         else:
             run_coroutine_threadsafe(voice.disconnect(), self.bot.loop)
             run_coroutine_threadsafe(self.message[ctx.guild].delete(), self.bot.loop)
+
+    def play_next_tts(self,ctx):
+        voice = get(self.bot.voice_clients, guild=ctx.guild)
+        if len(self.tts_queue[ctx.guild]) > 1:
+            os.remove(self.tts_queue[ctx.guild][0])
+            del self.tts_queue[ctx.guild][0]
+            print(self.tts_queue[ctx.guild])
+            voice.play(FFmpegPCMAudio(self.tts_queue[ctx.guild][0]), after=lambda e: self.play_next_tts(ctx))
+            emb=discord.Embed()
+            voice.is_playing()
+        else:
+            run_coroutine_threadsafe(voice.disconnect(), self.bot.loop)
+
 
 
     @commands.command(aliases=['sp'], brief='+songplay [genre]')
@@ -196,7 +216,7 @@ class Music(commands.Cog, name='Music'):
             await voice.move_to(channel)
         else:
             voice = await channel.connect()     
-
+        print(song)
         if not voice.is_playing():
             self.song_queue[ctx.guild] = [song]
             self.message[ctx.guild] = await ctx.send(embed=song['embed'])
@@ -207,7 +227,6 @@ class Music(commands.Cog, name='Music'):
             self.song_queue[ctx.guild].append(song)
             await self.edit_message(ctx)
         await ctx.message.delete()
-
 
     @commands.command(aliases=['s'], brief='+song [genre] ( receive a recommendation from Music Sensei for a particular genre. Type +genre for list of genres available.)')
     async def song(self, ctx, *, ge: str):
@@ -234,7 +253,7 @@ class Music(commands.Cog, name='Music'):
                  ar=[['{}'.format(songname),'{}'.format(artist),'{}'.format(link)]]
                  print(ar)
                  list_of_songs.append(ar)
-           
+            
              print(list_of_songs)
              grp= list_of_songs[random.randint(0,len(list_of_songs)-1)]
              print(grp)
@@ -266,6 +285,7 @@ class Music(commands.Cog, name='Music'):
          song = Music.search(ctx.author.mention, video,ur)
         except:
             song=Music.search(ctx.author.mention, video,ur)
+        print(song)
         await ctx.send('Added to queue checkout now playing section', delete_after=6.0)
         if voice and voice.is_connected():
             await voice.move_to(channel)
@@ -368,6 +388,7 @@ class Music(commands.Cog, name='Music'):
                   embed.add_field(name='Member :',value=f'{user}',inline=True)
                   embed.add_field(name='Listening to :',value=f'{name} by {artist}',inline=True)
               await ctx.send(embed=embed)
+
     @commands.command(aliases=['la'],brief='+listeningall')
     async def listeningall(self,ctx):
         n=[]
@@ -396,6 +417,103 @@ class Music(commands.Cog, name='Music'):
                   artist=item[2]
                   embed.add_field(name=(f'{user}'+' is listening to '),value=f'{name} by {artist}',inline=False)
               await ctx.send(embed=embed)
+
+#    @commands.command()
+#    async def tts(self,ctx,d,tex):
+#        voice = get(self.bot.voice_clients, guild=ctx.guild)
+#        # Gets voice channel of message author
+#        voice_channel = ctx.author.voice.channel
+#        channel = ctx.author.voice.channel
+#
+#        file = open("counter.txt","r")
+#        Counter = 0
+#        # Reading from file 
+#        Content = file.read()
+#        CoList = Content.split("\n")
+#  
+#        for i in CoList: 
+#            if i:
+#                Counter += 1
+#        file.close()
+#        k=Counter
+#
+#        di=d.strip().lower()
+#        tex1=ctx.message.content.replace(d,'').replace('+tts','')
+#        print('text : ',tex1)
+#        print('d : ',d)
+#        #text_to_read = "teri gaand maar dunga madarchod"
+#        try:
+#         if voice.is_playing():
+#          self.tts_queue[ctx.guild].append(f'my_file{str(k)}.mp3')
+#          while voice.is_playing():
+#            time.sleep(.1)
+#        except:
+#            pass
+#        #os.remove(f'my_file{str(k)}.mp3')
+#        k2=k+1
+#        print('k2=a+1 = ',k2)
+#        filename = f'my_file{str(k2)}.mp3'
+#
+#        file=open('counter.txt','a')
+#        file.write('a \n')
+#        file.close()
+#        
+#        def female(text,dia):
+#            language = f'en{dia}'
+#            slow_audio_speed = False
+#            audio_created = gTTS(text=text, lang=language,
+#                                 slow=slow_audio_speed)
+#            audio_created.save(filename)
+#        
+#        def male(text):
+#            engine=pyttsx3.init()
+#            voices = engine.getProperty('voices')
+#            engine.setProperty('voice', voices[0].id)
+#            engine.save_to_file(text, filename)
+#            engine.runAndWait()
+#        
+#        if(di.startswith('f-')):
+#            da=di.split('-')
+#            if len(da)>0:
+#              dial='-'+da[1]
+#            else:
+#              dial=''
+#            print(tex1,' ',dial)
+#            female(tex1,dial)
+#
+#        elif(di=='m'):
+#            male(tex1)
+#
+#
+#        if voice and voice.is_connected():
+#            await voice.move_to(channel)
+#        else:
+#            voice = await channel.connect()  
+#
+#        song=filename
+#        if not voice.is_playing():
+#            self.tts_queue[ctx.guild] = [song]
+#            voice.play(FFmpegPCMAudio(song), after=lambda e: self.play_next_tts(ctx))
+#            voice.is_playing()
+#        else:
+#            self.tts_queue[ctx.guild].append(song)
+#          
+#        '''
+#        if voice_channel != None:
+#            channel = voice_channel.name
+#            vc = await voice_channel.connect()
+#            vc.play(discord.FFmpegPCMAudio('my_file.mp3'))
+#            # Sleep while audio is playing.
+#            while vc.is_playing():
+#                time.sleep(.1)
+#            await vc.disconnect()
+#        else:
+#            await ctx.send(str(ctx.author.name) + "is not in a channel.")
+#        # Delete command after the audio is done playing.
+#        await ctx.message.delete()
+#       '''
+
+    
 
        
 

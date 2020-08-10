@@ -18,5 +18,7 @@ def male(text):
     engine=pyttsx3.init()
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[0].id)
-    engine.save_to_file(text_to_read, filename)
+    engine.save_to_file(text, filename)
     engine.runAndWait()
+
+female('hello','')
