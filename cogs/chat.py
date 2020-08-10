@@ -455,8 +455,8 @@ class chat(commands.Cog):
           #out1.show()
           return('abp_edit.png')
 
-      if (ctx.message.content.startswith('wmojinews')):
-	     text=ctx.message.content.replace('wmojinews ','')
+      if (ctx.message.content.startswith('s-makenews')):
+	     text=ctx.message.content.replace('s-makenews ','')
 	     a4=[]
 	     a=news1(text,a4)
 	     if(a=='k'):
