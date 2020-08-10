@@ -6,6 +6,7 @@ from requests import get
 import discord
 import urllib
 from PIL import Image,ImageFont,ImageDraw,ImageFilter,ImageEnhance
+from discord import Game
 
 genres=[
   'rock',
@@ -82,7 +83,17 @@ class chat(commands.Cog):
 
 
 
-
+    @commands.command()
+    async def update(self,ctx):
+        activeServers = self.bot.guilds
+        summ=0
+        for s in activeServers:
+            summ += len(s.members)
+        print(summ)
+        print('Yare Yare Dazei')
+        await self.bot.change_presence(activity=Game(name=f's-info | Supporting {summ} members.'))
+        await ctx.send(summ)
+        sum=0
 
     @commands.command(brief='+genres')
     async def genres(self, ctx):
@@ -229,11 +240,14 @@ class chat(commands.Cog):
     async def poll(self, ctx, *items):
          question = items[0]     
          answers = '\n'.join(items[1:])
-         embed = Embed(title='Poll :', description=f"__{question}__", color=0x3498db)
+         emojis = {1:'1️⃣',2:'2️⃣',3:'3️⃣',4:'4️⃣',5:'5️⃣',6:'6️⃣',7:'7️⃣',8:'8️⃣',9:'9️⃣'}
+         embed = Embed(title=f"**{question}**", color=0x3498db)
          embed.set_footer(text=f'Asked by {ctx.author}')
+
+         des=''
          for i in range(1, len(items)):
-             embed.add_field(name=f"{i}", value=items[i], inline=False)
-         #await ctx.message.delete()
+             des=des+emojis[i]+'.'+items[i]+'\n'
+         embed.description=des
          message = await ctx.channel.send(embed=embed)
          reactions = ['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣']
  
