@@ -72,7 +72,12 @@ class chat(commands.Cog):
         embed.add_field(name='`+bye`',value='leaves voice channel',inline=False)
         embed.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
         embed.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
-        await ctx.message.delete()
+        try:
+          await ctx.message.delete()
+        except:
+            pass
+
+
         await ctx.send(embed=embed)#hello
 
 
@@ -89,7 +94,12 @@ class chat(commands.Cog):
           m=m+' `{}`, '.format(genres[i])
         embed.description=m
         embed.set_footer(text='more to be added soon...')
-        await ctx.message.delete()
+        try:
+            await ctx.message.delete()
+        except:
+            pass
+
+
         await ctx.send(embed=embed,delete_after=45.0)
 
 
@@ -105,7 +115,12 @@ class chat(commands.Cog):
           n=n+' `{}`, '.format(i)
         embed.description=n
         embed.set_footer(text='more to added soon...')
-        await ctx.message.delete()
+        try:
+           await ctx.message.delete()
+        except:
+            pass
+
+
         await ctx.send(embed=embed)
 
 

@@ -17,7 +17,10 @@ class Logger(commands.Cog):
 
     @commands.command(brief='+log', hidden=True)
     async def log(self, ctx):
-        await ctx.message.delete()
+        try:  
+         await ctx.message.delete()
+        except:
+            pass
         try:
             if self.guilds[str(ctx.guild.id)]:
                 self.guilds[str(ctx.guild.id)] = False
@@ -66,7 +69,10 @@ class Logger(commands.Cog):
  
         embed = Embed(title="❌ Something went wrong:", description=msg, color=0xe74c3c)
         embed.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
-        await ctx.message.delete()
+        try:
+         await ctx.message.delete()
+        except:
+            pass
         await ctx.send(embed=embed, delete_after=7.0)
 
     @commands.Cog.listener()
