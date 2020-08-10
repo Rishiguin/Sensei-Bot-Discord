@@ -1,7 +1,7 @@
 from discord import Game
 from discord.ext import commands
 from discord import Client
-
+from discord.ext import tasks
 bot = commands.Bot(command_prefix='s-')
 initial_extensions = [
     'cogs.music',
@@ -16,8 +16,7 @@ if __name__ == '__main__':
 @bot.event #h
 async def on_ready():
     print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}')
-    await bot.change_preseuunce(activity=Game(name='s-info'))
+    await bot.change_presence(activity=Game(name='s-info'))
     print(f'Bot is ready!')                                                                                                                                                            
-
 
 bot.run('NzMyMzQyODE5NTEwODEyNzEz.Xw1TFw.EuCDtfSgWM9MJBJFdZr4dEqc3MI', bot=True, reconnect=True)
