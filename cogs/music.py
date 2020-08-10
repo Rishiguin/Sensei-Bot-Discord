@@ -88,7 +88,6 @@ class Music(commands.Cog, name='Music'):
     def __init__(self, bot):
         self.bot = bot
         self.song_queue = {}
-        self.tts_queue={}
         self.message = {}
 
     @staticmethod
@@ -141,19 +140,6 @@ class Music(commands.Cog, name='Music'):
         else:
             run_coroutine_threadsafe(voice.disconnect(), self.bot.loop)
             run_coroutine_threadsafe(self.message[ctx.guild].delete(), self.bot.loop)
-
-    def play_next_tts(self,ctx):
-        voice = get(self.bot.voice_clients, guild=ctx.guild)
-        if len(self.tts_queue[ctx.guild]) > 1:
-            os.remove(self.tts_queue[ctx.guild][0])
-            del self.tts_queue[ctx.guild][0]
-            print(self.tts_queue[ctx.guild])
-            voice.play(FFmpegPCMAudio(self.tts_queue[ctx.guild][0]), after=lambda e: self.play_next_tts(ctx))
-            emb=discord.Embed()
-            voice.is_playing()
-        else:
-            run_coroutine_threadsafe(voice.disconnect(), self.bot.loop)
-
 
 
     @commands.command(aliases=['sp'], brief='+songplay [genre]')
@@ -358,7 +344,7 @@ class Music(commands.Cog, name='Music'):
 
     @commands.command(aliases=['l'],brief='+listening [song/artist]')
     async def listening(self,ctx,arso: str):
-        q=ctx.message.content.replace('+listening','').strip().lower()
+        q=ctx.message.content.replace('s-listening','').strip().lower()
         n=[]
         ns=0
         for i in ctx.guild.members:
