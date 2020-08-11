@@ -118,17 +118,14 @@ class Music(commands.Cog, name='Music'):
             print(e)
 
     async def edit_message(self, ctx):
-        li=[]
         try:
          embed = self.song_queue[ctx.guild][0]['embed']
          content = "\n".join([f"({self.song_queue[ctx.guild].index(i)}) {i['title']}" for i in self.song_queue[ctx.guild][1:]]) if len(self.song_queue[ctx.guild]) > 1 else "No song queued"
          embed.set_field_at(index=3, name="Queue :", value=content, inline=False)
          await self.message[ctx.guild].edit(embed=embed)
-         li=[].append(embed)
-         print(li)
         except Exception as e:
             print(e)
-
+            
     def play_next(self, ctx):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if len(self.song_queue[ctx.guild]) > 1:
@@ -139,10 +136,9 @@ class Music(commands.Cog, name='Music'):
             voice.is_playing()
         else:
             run_coroutine_threadsafe(voice.disconnect(), self.bot.loop)
-            run_coroutine_threadsafe(self.message[ctx.guild].delete(), self.bot.loop)
 
 
-    @commands.command(aliases=['sp'], brief='+songplay [genre]')
+    @commands.command(aliases=['sp'], brief='s-songplay [genre/mood] play a song recommended by Sensei of the mood/genre')
     async def songplay(self, ctx, *, ge: str):
         ur=''
         channel = ctx.author.voice.channel
@@ -196,7 +192,7 @@ class Music(commands.Cog, name='Music'):
              await ctx.channel.send(embed=embed,delete_after=6.0)
              song = Music.search(ctx.author.mention,(songname1+' '+artist1),ur)
         else:
-             await ctx.send('`❌ Genre/Mood not found, type +genres or +moods for list of genres/moods`',delete_after=6.0)
+             await ctx.send('`❌ Genre/Mood not found, type s-genres or s-moods for list of genres/moods`',delete_after=6.0)
 
         if voice and voice.is_connected():
             await voice.move_to(channel)
@@ -222,9 +218,7 @@ class Music(commands.Cog, name='Music'):
         except:
                pass
    
-
-
-    @commands.command(aliases=['s'], brief='+song [genre] ( receive a recommendation from Music Sensei for a particular genre. Type +genre for list of genres available.)')
+    @commands.command(aliases=['s'], brief='s-song [genre/mood] : receive a recommendation from Music Sensei for a particular genre. Type s-genre or s-mood for list of genres/moods available.')
     async def song(self, ctx, *, ge: str):
         print(ctx.author.mention)
         list_of_songs=[]
@@ -272,9 +266,9 @@ class Music(commands.Cog, name='Music'):
    
 
         else:
-             await ctx.send('`❌ Genre/Mood not found, type +genres or +moods for list of genres/moods`',delete_after=6.0)
+             await ctx.send('`❌ Genre/Mood not found, type s-genres or s-moods for list of genres/moods`',delete_after=6.0)
              
-    @commands.command(aliases=['p'], brief='+play [play any youtube url/songname]')
+    @commands.command(aliases=['p'], brief='s-play [play any youtube url/songname] : play a songname/YT url')
     async def play(self, ctx, *, video: str):
         channel = ctx.author.voice.channel
         gli='allr'
@@ -314,9 +308,7 @@ class Music(commands.Cog, name='Music'):
         except:
                pass
    
-
-       
-    @commands.command(aliases=['resume'],brief='+resume')
+    @commands.command(aliases=['resume'],brief='s-resume : resume music ')
     async def pause(self, ctx):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if voice.is_connected():
@@ -333,13 +325,7 @@ class Music(commands.Cog, name='Music'):
                 await ctx.send('⏯️ Music resumed', delete_after=5.0)
                 voice.resume()
 
-    @commands.command(aliases=['emb'],brief='+embed')
-    async def embed(self, ctx):
-         embed=discord.Embed(color=0x4400ff)
-         embed.set_image(url='https://media.giphy.com/media/j5zqQSABpeHCU8EpO3/giphy.gif')
-         await ctx.send(embed=embed)
-
-    @commands.command(aliases=['pass'], brief='+skip')
+    @commands.command(aliases=['pass'], brief='s-skip : skip a song')
     async def skip(self, ctx):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if voice.is_playing():
@@ -352,7 +338,7 @@ class Music(commands.Cog, name='Music'):
             await ctx.send('⏭️ Music skipped', delete_after=5.0)
             voice.stop()
 
-    @commands.command(brief='+remove')
+    @commands.command(brief='s-remove [index no.] : removes song from the queue with the specified index no. ')
     async def remove(self, ctx, *, num: int):
         voice = get(self.bot.voice_clients, guild=ctx.guild)
         if voice.is_playing():
@@ -365,7 +351,7 @@ class Music(commands.Cog, name='Music'):
 
             await self.edit_message(ctx)
 
-    @commands.command(brief='+spotify [@member]')
+    @commands.command(brief='s-spotify [@member] : shows what the mentioned member is listening to')
     async def spotify(self,ctx, user: discord.Member=None):
         user = user or ctx.author
         k=0
@@ -376,13 +362,13 @@ class Music(commands.Cog, name='Music'):
         if(k==0):
             await ctx.send("User is not listening to anything on Spotify.")
             
-    @commands.command(aliases=['dis','leave','bye'], brief='+disconnect (leaves voice channel currently playing in)')
+    @commands.command(aliases=['dis','leave','bye'], brief='s-disconnect : leaves voice channel currently playing in')
     async def disconnect(self, ctx):
         server = ctx.message.guild.voice_client
         await ctx.send(':wave: see you later',delete_after=5.0)
         await server.disconnect()
 
-    @commands.command(aliases=['l'],brief='+listening [song/artist]')
+    @commands.command(aliases=['l'],brief='s-listening [song/artist] : gets a list of members listening to that particular song/artist')
     async def listening(self,ctx,arso: str):
         q=ctx.message.content.replace('s-listening','').strip().lower()
         n=[]
@@ -403,7 +389,7 @@ class Music(commands.Cog, name='Music'):
               pre='people are'
           embed = discord.Embed(color=0x4400ff)
           embed.description=(str(ns)+f' {pre} '+'listening to songs on Spotify in this server right now')
-          embed.add_field(name=f'No of people listeing to {q} : ',value=len(n),inline=False)
+          embed.add_field(name=f'No of people listening to {q} : ',value=len(n),inline=False)
           if(len(n)==0):
               await ctx.send(embed=embed)
           else:
@@ -415,7 +401,7 @@ class Music(commands.Cog, name='Music'):
                   embed.add_field(name='Listening to :',value=f'{name} by {artist}',inline=True)
               await ctx.send(embed=embed)
 
-    @commands.command(aliases=['la'],brief='+listeningall')
+    @commands.command(aliases=['la'],brief='s-listeningall : gets a list of all the members in the server currently listening to music')
     async def listeningall(self,ctx):
         n=[]
         ns=0
