@@ -397,8 +397,7 @@ class Music(commands.Cog, name='Music'):
                   user=item[0]
                   name=item[1]
                   artist=item[2]
-                  embed.add_field(name='Member :',value=f'{user}',inline=True)
-                  embed.add_field(name='Listening to :',value=f'{name} by {artist}',inline=True)
+                  embed.add_field(name=(f'{user}'+' is listening to '),value=f'{name} by {artist}',inline=False)
               await ctx.send(embed=embed)
 
     @commands.command(aliases=['la'],brief='s-listeningall : gets a list of all the members in the server currently listening to music')
