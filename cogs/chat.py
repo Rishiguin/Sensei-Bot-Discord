@@ -13,8 +13,8 @@ genres=[
   'hiphop',
   'metal',
   'epic',
-  'synthwave'
-  '90s'
+  'synthwave',
+  '90s',
   'classical',
   'r&b',
   'heavymetal',
@@ -47,60 +47,90 @@ class chat(commands.Cog):
 
 
 
-    @commands.command(brief='+info')
+    @commands.command(brief='s-info')
     async def info(self, ctx):
         k=0
-        embed = Embed(color=0x9240FF, title='List of commands : ')
-#        for cog in self.bot.cogs:
-#            if self.bot.get_cog(cog).get_commands():
-#                temp = []
-#                for cmd in self.bot.get_cog(cog).get_commands():
-#                    if not cmd.hidden:
-#                        temp.append(f"{cmd.brief}\n")
-#                if temp:
-#                    embed.add_field(name=f'**{cog} :**', value=f"{'-> '.join(temp)}", inline=False)
-        embed.add_field(name='`+song or +s [genre/mood]`',value='get a song recommended by Sensei along with the Spotify link',inline=False)
-        embed.add_field(name='`+songplay or +sp [genre/mood]`',value='play a song recommended by Sensei',inline=False)
-        embed.add_field(name='`+listening [song/artist]`',value='Get a list of all the people in your server listening to that song/artist',inline=False)
-        embed.add_field(name='`+listeningall or +la`',value='Get a list of all the members in your server currently listening to songs',inline=False)
-        embed.add_field(name='`+genres`',value='get a list of genres that Sensei supports',inline=False)
-        embed.add_field(name='`+moods`',value='get a list of moods that Sensei supports',inline=False)
-        embed.add_field(name='`+play [youtube url/song name]`',value='play any song of your choice',inline=False)
-        embed.add_field(name='`+pause`',value='pause the music',inline=False)
-        embed.add_field(name='`+resume`',value='resume the music',inline=False)
-        embed.add_field(name='`+skip`',value='skip the current currently playing song',inline=False)
-        embed.add_field(name='`+remove [index in queue]`',value='remove a song from the queue',inline=False)
-        embed.add_field(name='`+bye`',value='leaves voice channel',inline=False)
-        embed.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
-        embed.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
-        try:
-          await ctx.message.delete()
-        except:
-            pass
+        m,c='',''
+
+        embed1=Embed(color=0xff3053, title='List of commands : ')
+        embed2 = Embed(color=0xff3053, title='Music')
+        embed3=Embed(color=0xff3053, title='Chat ')
+
+        music1=['song','songplay','listening','listeningall','moods','genres','spotify','play','skip','resume','pause','disconnect','remove']
+        chat1=['poll','urban','idea','joke','meme','makenews','twitchgame','twitchstreamer']
+
+        for i1 in music1:
+            m=m+'`{}`'.format(i1)+' | '
+        for i2 in chat1:
+            c=c+'`{}`'.format(i2)+' | '
+
+        em={'music':embed2
+        , 'chat':embed3
+        , 'info':embed1}
 
 
-        await ctx.send(embed=embed)#hello
+        if ctx.message.content=='s-info':
+         cate='info'
+        else:
+         cate = str(ctx.message.content.replace('s-info ','').strip().lower())
+        print(cate)
+
+        embed1.description= f'**MUSIC**\n{m}\n\n**CHAT**\n{c}\n\n To get info on the different categories use `s-info [category]`'
+        embed1.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
+
+        embed3.add_field(name='`s-poll ["question in double quotes"] [options separated by spaces]`',value='conduct a poll \n example: s-poll "How is this bot ?" good bad',inline=False)
+        embed3.add_field(name='`s-urban [word]`',value='gives the meaning of the word from urban dictionary ',inline=False)
+        embed3.add_field(name='`s-idea`',value='gives a random idea',inline=False)
+        embed3.add_field(name='`s-joke`',value='tells a joke',inline=False)
+        embed3.add_field(name='`s-meme`',value='fetches a meme from reddit',inline=False)
+        embed3.add_field(name='`s-makenews [news]`',value='make a news banner',inline=False)
+        embed3.add_field(name='`s-twitchgame or s-tg [game] [key-words (optional)]`',value='get live streams related to the game \n example : s-twitchgame minecraft',inline=False)
+        embed3.add_field(name='`s-twitchstreamer or s-ts [streamer]`',value='get status of the streamer \n example : s-twitchstreamer ninja ',inline=False)
+        embed3.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
+
+        embed2.add_field(name='`s-song or s-s [genre/mood]`',value='get a song recommended by Sensei along with the Spotify link \n example : s-song lofi',inline=False)
+        embed2.add_field(name='`s-songplay or s-sp [genre/mood]`',value='play a song recommended by Sensei \n example : s-sp metal',inline=False)
+        embed2.add_field(name='`s-listening [song/artist]`',value='Get a list of all the people in your server listening to that song/artist',inline=False)
+        embed2.add_field(name='`s-listeningall or s-la`',value='Get a list of all the members in your server currently listening to songs',inline=False)
+        embed2.add_field(name='`s-genres`',value='get a list of genres that Sensei supports',inline=False)
+        embed2.add_field(name='`s-moods`',value='get a list of moods that Sensei supports',inline=False)
+        embed2.add_field(name='`s-play [youtube url/song name]`',value='play any song of your choice',inline=False)
+        embed2.add_field(name='`s-pause`',value='pause the music',inline=False)
+        embed2.add_field(name='`s-resume`',value='resume the music',inline=False)
+        embed2.add_field(name='`s-skip`',value='skip the current currently playing song',inline=False)
+        embed2.add_field(name='`s-remove [index in queue]`',value='remove a song from the queue',inline=False)
+        embed2.add_field(name='`s-bye`',value='leaves voice channel',inline=False)
+        embed2.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
+        embed2.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
+
+        q=em[cate]
+        await ctx.send(embed=q)#hello
 
 
 
     @commands.command()
     async def update(self,ctx):
-        activeServers = self.bot.guilds
-        summ=0
-        for s in activeServers:
-            summ += len(s.members)
-        print(summ)
-        print('Yare Yare Dazei')
-        await self.bot.change_presence(activity=Game(name=f's-info | Supporting {summ} members.'))
-        await ctx.send(summ)
-        sum=0
-
-    @commands.command(brief='+genres')
+        print(str(ctx.message.author))
+        if('Rishi#5250' in (str(ctx.message.author))):
+          activeServers = self.bot.guilds
+          summ=0
+          for s in activeServers:
+              summ += len(s.members)
+          print(summ)
+          summ1=146003
+          print('Yare Yare Dazei')
+          await self.bot.change_presence(activity=Game(name=f's-info | Supporting {summ} members.'))
+          await ctx.send(summ)
+          sum=0
+        else:
+          await ctx.send('Not authorized')
+  
+    @commands.command(brief='s-genres : get a list of genres')
     async def genres(self, ctx):
         embed = Embed(color=0x9240FF, title='Genres : ')
         m=''
-        embed.add_field(name='`+songplay or +sp [genre]` :get a song played of the genre by music sensei',value='Example : +songplay heavymetal',inline=False)
-        embed.add_field(name='`+song or +s [genre]` :get a song recommended of the genre by Music Sensei',value='Example : +song heavymetal',inline=True)
+        embed.add_field(name='`s-songplay or s-sp [genre]` :get a song played of the genre by music sensei',value='Example : s-songplay heavymetal',inline=False)
+        embed.add_field(name='`s-song or s-s [genre]` :get a song recommended of the genre by Music Sensei',value='Example : s-song heavymetal',inline=True)
         for i in range(0,len(genres)):
           m=m+' `{}`, '.format(genres[i])
         embed.description=m
@@ -111,16 +141,20 @@ class chat(commands.Cog):
             pass
 
 
-        await ctx.send(embed=embed,delete_after=45.0)
+        await ctx.send(embed=embed)
 
 
+    @commands.command()
+    async def invite(self,ctx):
+      e=Embed(color=0xde2312,description=f"**[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)**")
+      await ctx.send(embed=e)
 
 
-    @commands.command(brief='+moods')
+    @commands.command(brief='s-moods : get a list of moods')
     async def moods(self,ctx):
         embed = Embed(color=0x9240FF, title='Moods : ')
-        embed.add_field(name='`+songplay or +sp [mood]` :get a song played of the mood by Music Sensei',value='Example : +songplay happy')
-        embed.add_field(name='`+song or +s [mood]` :get a song recommended of the mood by Music Sensei',value='Example : +song happy')
+        embed.add_field(name='`s-songplay or s-sp [mood]` :get a song played of the mood by Music Sensei',value='Example : s-songplay happy')
+        embed.add_field(name='`s-song or s-s [mood]` :get a song recommended of the mood by Music Sensei',value='Example : s-song happy')
         n=''
         for i in moods:
           n=n+' `{}`, '.format(i)
@@ -137,7 +171,7 @@ class chat(commands.Cog):
 
 
 
-    @commands.command(brief='+urban [word] | (gives the meaning of the word from urban dictionary)')
+    @commands.command(brief='s-urban [word] : gives the meaning of the word from urban dictionary')
     async def urban(self,ctx):
         #print(ctx.ctx.message.content)
         word=ctx.message.content.replace('s-urban ','').strip()
@@ -180,7 +214,7 @@ class chat(commands.Cog):
 
 
 
-    @commands.command(brief='+idea')
+    @commands.command(brief='s-idea : gives a random idea')
     async def idea(self,ctx):
         print(ctx.message.content)
         import time
@@ -197,7 +231,7 @@ class chat(commands.Cog):
 
 
 
-    @commands.command(brief='+joke')
+    @commands.command(brief='s-joke : tells a joke')
     async def joke(self,ctx):
       import time
       d=requests.get('https://sv443.net/jokeapi/v2/joke/Any?type=twopart')
@@ -217,26 +251,26 @@ class chat(commands.Cog):
 
 
 
-
-    @commands.command(brief='+scanurl')
-    async def scanurl(self,ctx):
-      import time
-      url=ctx.message.content.replace('s-scanurl','').strip()
-      if not url.startswith('https://'):
-        embed = Embed(title="❌ Enter a valid url", color=0xe74c3c)
-        await ctx.send(embed=embed)
-      else:
-        e=mal(url)
-        e2 = Embed(color=0xC52430)
-        e2.set_author(name='Processing...',icon_url='https://media.giphy.com/media/5th8zFFsvNOuM6nGsq/giphy.gif') 
-        msg = await ctx.send(embed=e2)
-        time.sleep(3)
-        await msg.edit(embed=e)
+#
+  #  @commands.command(brief='s-scanurl')
+  #  async def scanurl(self,ctx):
+  #    import time
+  #    url=ctx.message.content.replace('s-scanurl','').strip()
+  #    if not url.startswith('https://'):
+  #      embed = Embed(title="❌ Enter a valid url", color=0xe74c3c)
+  #      await ctx.send(embed=embed)
+  #    else:
+  #      e=mal(url)
+  #      e2 = Embed(color=0xC52430)
+  #      e2.set_author(name='Processing...',icon_url='https://media.giphy.com/media/5th8zFFsvNOuM6nGsq/giphy.gif') 
+  #      msg = await ctx.send(embed=e2)
+  #      time.sleep(3)
+  #      await msg.edit(embed=e)
 
  
 
 
-    @commands.command(brief='+poll ["question"] [answers separated by spaces]')
+    @commands.command(brief='s-poll ["question"] [answers separated by spaces]')
     async def poll(self, ctx, *items):
          question = items[0]     
          answers = '\n'.join(items[1:])
@@ -257,7 +291,7 @@ class chat(commands.Cog):
 
 
 
-    @commands.command(brief='+meme')
+    @commands.command(brief='s-meme')
     async def meme(self, ctx):
          data = get('https://meme-api.herokuapp.com/gimme').json()
          embed = (Embed(title=f":speech_balloon: r/{data['subreddit']} :", color=0x9240FF)
@@ -354,41 +388,35 @@ class chat(commands.Cog):
   
 
 
-    @commands.command(aliases=['help tts'])
-    async def help_tts(self,ctx):
-      emb=Embed(color=0x9240FF)
-      dialects=[
-
-        'f-us;English (US)',
-        'f-in;English (India)',
-        'f-ca;English (Canada)',
-        'f-uk;English (UK)',
-        'f-gb;English (UK)',
-        'f-au;English (Australia)',
-        'f-gh;English (Ghana)',
-        'f-ie;English (Ireland)',
-        'f-nz;English (New Zealand)',
-        'f-ng;English (Nigeria)',
-        'f-ph;English (Philippines)',
-        'f-za;English (South Africa)',
-      ]
-
-      hagf=''
-
-      for d in dialects :
-        d1=d.split(';')
-        print(d1)
-        hagf=hagf+'*{}*'.format(d1[0])+' = '+d1[1]+' \n'
-      print(hagf)
-      emb.title='TTS'
-      emb.description='1. ** +tts [gender] [text] ** \n\n gender: m for male , f for female \n example command : `+tts m hello there` \n\n -(optional) For **female** voice different dialects can be chosen \n\n Dialects : \n {} \n example: `+tts f-in hello there` \n\n **WARNING : Dialects are available only for female voice**'.format(hagf)
-      await ctx.send(embed=emb)
-
-
-
-    @commands.command()
-    async def geturl(self,ctx,emoji: discord.Emoji):
-     await ctx.send(emoji.url) 
+    #@commands.command(aliases=['help tts'])
+   # async def help_tts(self,ctx):
+   #   emb=Embed(color=0x9240FF)
+   #   dialects=[
+#
+   #     'f-us;English (US)',
+   #     'f-in;English (India)',
+   #     'f-ca;English (Canada)',
+   #     'f-uk;English (UK)',
+   #     'f-gb;English (UK)',
+   #     'f-au;English (Australia)',
+   #     'f-gh;English (Ghana)',
+   #     'f-ie;English (Ireland)',
+   #     'f-nz;English (New Zealand)',
+   #     'f-ng;English (Nigeria)',
+   #     'f-ph;English (Philippines)',
+   #     'f-za;English (South Africa)',
+   #   ]
+#
+   #   hagf=''
+#
+   #   for d in dialects :
+   #     d1=d.split(';')
+   #     print(d1)
+   #     hagf=hagf+'*{}*'.format(d1[0])+' = '+d1[1]+' \n'
+   #   print(hagf)
+   #   emb.title='TTS'
+   #   emb.description='1. ** s-tts [gender] [text] ** \n\n gender: m for male , f for female \n example command : `s-tts m hello there` \n\n -(optional) For **female** voice different dialects can be chosen \n\n Dialects : \n {} \n example: `s-tts f-in hello there` \n\n **WARNING : Dialects are available only for female voice**'.format(hagf)
+   #   await ctx.send(embed=emb)
 
     
     @commands.command()
@@ -492,12 +520,6 @@ class chat(commands.Cog):
 	 	       await ctx.send(f'**Limit : 93 characters**\nRemove {len(text)-93} characters.')
 	      else :
 	         await ctx.send(file=discord.File(a))
-
-
-
-
-
-
 
 
 
