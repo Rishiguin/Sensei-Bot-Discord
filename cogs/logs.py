@@ -39,8 +39,6 @@ class Logger(commands.Cog):
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
             msg = f'You must input those arguments: {error.param.name}'
-        elif isinstance(error, commands.CommandNotFound):
-            msg = 'Command not found!'
         elif isinstance(error, commands.MissingPermissions):
             msg = "You're not allowed to use this command!"
         elif isinstance(error, commands.BotMissingPermissions):
@@ -51,9 +49,6 @@ class Logger(commands.Cog):
                 msg = 'You must input an integer!'
             elif 'Member' in str(error):
                 msg = "Membre introuvable !"
-        elif isinstance(error, commands.CommandInvokeError):
-            if 'index' in str(error):
-                msg = "Argument's too big!"
             elif 'NoneType' in str(error):
                 msg = "I'm not connected to any channel!" if 'is_playing' in str(error) else "You're not connected to any channel!"
             elif ('ValueError' or 'KeyError') in str(error):
@@ -82,7 +77,7 @@ class Logger(commands.Cog):
                 if channel.name == "logs" and self.guilds[str(ctx.guild.id)]:
                     command = f"{ctx.author.mention}: !{ctx.command.name}{ctx.message.content[(len(ctx.command.name)+1):]}"
                     now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-                    embed = Embed(title=':pager: Commande exécutée :', description=command, color=0x3498db)
+                    embed = Embed(title=':pager: Command execute :', description=command, color=0x3498db)
                     embed.add_field(name='\u200b', value=now)
                     await channel.send(embed=embed)
             except:
