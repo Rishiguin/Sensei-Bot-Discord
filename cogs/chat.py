@@ -1,5 +1,6 @@
 from discord import Embed
 from discord.ext import commands
+from discord.ext.commands import has_permissions, MissingPermissions
 import requests
 import json
 from requests import get
@@ -7,6 +8,7 @@ import discord
 import urllib
 from PIL import Image,ImageFont,ImageDraw,ImageFilter,ImageEnhance
 from discord import Game
+import sqlite3
 
 genres=[
   'rock',
@@ -39,6 +41,7 @@ moods=[
     'angry',
     'badass'
 ]
+
 class chat(commands.Cog):
     
     def __init__(self, bot):
@@ -46,27 +49,31 @@ class chat(commands.Cog):
     
 
 
-
     @commands.command(brief='s-info')
     async def info(self, ctx):
         k=0
-        m,c='',''
+        m,c,s='','',''
 
         embed1=Embed(color=0xff3053, title='List of commands : ')
-        embed2 = Embed(color=0xff3053, title='Music')
-        embed3=Embed(color=0xff3053, title='Chat ')
+        embed2 = Embed(color=0xff3053, title='Music - All the commands related to music')
+        embed3=Embed(color=0xff3053, title='Chat - All the micellaneous commands')
+        embed4=Embed(color=0xff3053, title='Starboard - Make your own server Starboard !')
 
         music1=['song','songplay','listening','listeningall','moods','genres','spotify','play','skip','resume','pause','disconnect','remove']
         chat1=['poll','urban','idea','joke','meme','makenews','twitchgame','twitchstreamer']
+        starb=['starboard_add']
 
         for i1 in music1:
             m=m+'`{}`'.format(i1)+' | '
         for i2 in chat1:
             c=c+'`{}`'.format(i2)+' | '
+        for i3 in starb:
+            s=s+' | '+'`{}`'.format(i3)+' | '
 
         em={'music':embed2
         , 'chat':embed3
-        , 'info':embed1}
+        , 'info':embed1
+        ,'starboard':embed4}
 
 
         if ctx.message.content=='s-info':
@@ -75,7 +82,7 @@ class chat(commands.Cog):
          cate = str(ctx.message.content.replace('s-info ','').strip().lower())
         print(cate)
 
-        embed1.description= f'**MUSIC**\n{m}\n\n**CHAT**\n{c}\n\n To get info on the different categories use `s-info [category]`'
+        embed1.description= f'**MUSIC**\n{m}\n\n**CHAT**\n{c}\n\n**STARBOARD**\n{s}\n\nTo get info on the different categories use `s-info [category]`\nexample : `s-info starboard`\n\nIf you are having any type of issue with the bot just contact *Rishi#5250*'
         embed1.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
 
         embed3.add_field(name='`s-poll ["question in double quotes"] [options separated by spaces]`',value='conduct a poll \n example: s-poll "How is this bot ?" good bad',inline=False)
@@ -103,9 +110,12 @@ class chat(commands.Cog):
         embed2.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
         embed2.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
 
+        embed4.description="*A starboard is a popular feature in bots that serve as a channel of messages that users of the server find funny, stupid, or both! \nThe users react to a message they like and if it gets as many likes as set in the command then it goes to starboard*\n\nCreate a starboard in your server by using command : \n`s-starboard_add [channel name] [stars required for starboard]`\n\nExample : `s-starboard_add #starboard 3` \n\n-Update the channel or starcount requirement by using this same command\n\n-It is recommended to set starboard channel to some channel which does not allow user to send messages \n\n-**Allow Sensei to read messages and add reactions to all the channels which you wish to be starred**\n**In starboard channel remember to allow Sensei to**  : \n`send messages` , `manage messages ` , `embed links` , `attach files` ,\n`read message history` , `add reactions` , `use external emojis` "
+        embed4.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
+        embed4.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
+
         q=em[cate]
         await ctx.send(embed=q)#hello
-
 
 
     @commands.command()
@@ -169,8 +179,6 @@ class chat(commands.Cog):
         await ctx.send(embed=embed)
 
 
-
-
     @commands.command(brief='s-urban [word] : gives the meaning of the word from urban dictionary')
     async def urban(self,ctx):
         #print(ctx.ctx.message.content)
@@ -212,8 +220,6 @@ class chat(commands.Cog):
         await ctx.send(embed=embed)
 
 
-
-
     @commands.command(brief='s-idea : gives a random idea')
     async def idea(self,ctx):
         print(ctx.message.content)
@@ -227,8 +233,6 @@ class chat(commands.Cog):
         adv=res.text
         embed.description='I have an idea. '+adv
         await msg.edit(embed=embed)
-
-
 
 
     @commands.command(brief='s-joke : tells a joke')
@@ -250,8 +254,6 @@ class chat(commands.Cog):
       await msg.edit(embed=e2)
 
 
-
-#
   #  @commands.command(brief='s-scanurl')
   #  async def scanurl(self,ctx):
   #    import time
@@ -266,9 +268,6 @@ class chat(commands.Cog):
   #      msg = await ctx.send(embed=e2)
   #      time.sleep(3)
   #      await msg.edit(embed=e)
-
- 
-
 
     @commands.command(brief='s-poll ["question"] [answers separated by spaces]')
     async def poll(self, ctx, *items):
@@ -289,8 +288,6 @@ class chat(commands.Cog):
              await message.add_reaction(reactions[i])
  
 
-
-
     @commands.command(brief='s-meme')
     async def meme(self, ctx):
          data = get('https://meme-api.herokuapp.com/gimme').json()
@@ -298,8 +295,6 @@ class chat(commands.Cog):
                  .set_image(url=data['url'])
                  .set_footer(text=data['postLink']))
          await ctx.send(embed=embed)
-
-
 
 
     @commands.command(brief='twitch [game] [key-words (optional)]',aliases=['tg','twitch game'])
@@ -340,9 +335,6 @@ class chat(commands.Cog):
               return
       embed = Embed(title=f"❌ Something went wrong:", description="No streams found", color=0xe74c3c)
       await ctx.send(embed=embed) 
-
-
-
 
 
     @commands.command(brief='twitch [streamer] ',aliases=['ts'])
@@ -387,8 +379,7 @@ class chat(commands.Cog):
        await ctx.send(embed=embed) 
   
 
-
-    #@commands.command(aliases=['help tts'])
+    #@commands.command(aliases=['help tts']) 
    # async def help_tts(self,ctx):
    #   emb=Embed(color=0x9240FF)
    #   dialects=[
@@ -522,6 +513,52 @@ class chat(commands.Cog):
 	         await ctx.send(file=discord.File(a))
 
 
+    @commands.command(aliases=['sb_add'])
+    @has_permissions(manage_channels=True)
+    async def starboard_add(self,ctx,channel_mention,star_count):
+
+      g_id=ctx.message.guild.id
+      c_id=int(channel_mention.replace('<','').replace('>','').replace('#','').replace('@','').strip())
+
+      conn = sqlite3.connect('starboard.db')
+      c=conn.cursor()
+
+      c.execute("SELECT * FROM sb WHERE guildid= ? AND channelid= ? AND starcount = ?",(g_id,c_id,star_count))
+      exist=c.fetchone()
+
+      if exist is None:
+        c.execute("SELECT * FROM sb WHERE guildid=? ",(g_id,))
+        exist2=c.fetchone()
+        if not exist2 is None:
+          gi,ci,sc=exist2
+          if(ci != c_id):
+            c.execute('''UPDATE sb
+                         SET channelid=?
+                         WHERE guildid = ?''',(c_id,g_id))
+            await ctx.send('**STARBOARD CHANNEL SUCCESFULLY CHANGED**')
+          elif(sc != star_count):
+            c.execute('''UPDATE sb
+                         SET starcount=?
+                         WHERE guildid = ?''',(star_count,g_id))
+            await ctx.send('**STARBOARD CHANNEL STARCOUNT SUCCESFULLY CHANGED**')      
+
+        else:
+          c.execute('''INSERT INTO sb
+                       VALUES(?,?,?) ''',(g_id,c_id,star_count))
+          await ctx.send('**STARBOARD CHANNEL SUCCESFULLY SET**')
+
+        conn.commit()
+
+      else:
+          await ctx.send('**SPECIFIED CHANNEL WITH THIS STARCOUNT ALREADY ADDED**')
+      
+      conn.close()
+
+    @starboard_add.error
+    async def sb_error(self,error, ctx):
+     if isinstance(error, MissingPermissions):
+         text = "Sorry {}, you do not have permissions to do that!".format(ctx.message.author)
+         await ctx.send(ctx.message.channel, text)
 
 
 def setup(bot):
