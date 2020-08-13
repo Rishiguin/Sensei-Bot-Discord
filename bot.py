@@ -60,6 +60,7 @@ async def on_raw_reaction_add(ctx):
                 reaction = get(message.reactions, emoji="⭐")
                 if(reaction.count > scount-1):
                  try:
+                   print(message.jump_url)
                    ch=bot.get_channel(cid)
                    e.set_footer(text=str((str(message.created_at).split(' '))[0]))
                    ti=(f'💫 | {message.channel.mention}')
