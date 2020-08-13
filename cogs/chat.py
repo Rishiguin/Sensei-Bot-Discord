@@ -49,8 +49,8 @@ class chat(commands.Cog):
     
 
 
-    @commands.command(brief='s-info')
-    async def info(self, ctx):
+    @commands.command(brief='s-help')
+    async def help(self, ctx):
         k=0
         m,c,s='','',''
 
@@ -72,17 +72,17 @@ class chat(commands.Cog):
 
         em={'music':embed2
         , 'chat':embed3
-        , 'info':embed1
+        , 'help':embed1
         ,'starboard':embed4}
 
 
-        if ctx.message.content=='s-info':
-         cate='info'
+        if ctx.message.content=='s-help':
+         cate='help'
         else:
-         cate = str(ctx.message.content.replace('s-info ','').strip().lower())
+         cate = str(ctx.message.content.replace('s-help ','').strip().lower())
         print(cate)
 
-        embed1.description= f'**MUSIC**\n{m}\n\n**CHAT**\n{c}\n\n**STARBOARD**\n{s}\n\nTo get info on the different categories use `s-info [category]`\nexample : `s-info starboard`\n\nIf you are having any type of issue with the bot just contact *Rishi#5250*'
+        embed1.description= f'**MUSIC**\n{m}\n\n**CHAT**\n{c}\n\n**STARBOARD**\n{s}\n\nTo get help on the different categories use `s-help [category]`\nexample : `s-help starboard`\n\nIf you are having any type of issue with the bot just contact *Rishi#5250*'
         embed1.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
 
         embed3.add_field(name='`s-poll ["question in double quotes"] [options separated by spaces]`',value='conduct a poll \n example: s-poll "How is this bot ?" good bad',inline=False)
@@ -110,7 +110,7 @@ class chat(commands.Cog):
         embed2.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
         embed2.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
 
-        embed4.description="*A starboard is a popular feature in bots that serve as a channel of messages that users of the server find funny, stupid, or both! \nThe users react to a message they like and if it gets as many likes as set in the command then it goes to starboard*\n\nCreate a starboard in your server by using command : \n`s-starboard_add [channel name] [stars required for starboard]`\n\nExample : `s-starboard_add #starboard 3` \n\n-Update the channel or starcount requirement by using this same command\n\n-It is recommended to set starboard channel to some channel which does not allow user to send messages \n\n-**Allow Sensei to read messages and add reactions to all the channels which you wish to be starred**\n**In starboard channel remember to allow Sensei to**  : \n`send messages` , `manage messages ` , `embed links` , `attach files` ,\n`read message history` , `add reactions` , `use external emojis` "
+        embed4.description="*A starboard is a popular feature in bots that serve as a channel of messages that users of the server find funny, stupid, or both! \nThe members react to a message they like and if it gets as many stars as set in the command then it goes to starboard*\n\nCreate a starboard in your server by using command : \n`s-starboard_add [channel name] [stars required for starboard]`\n\nExample : `s-starboard_add #starboard 3` \n\n-Update the channel or starcount requirement by using this same command\n\n-It is recommended to set starboard channel to some channel which does not allow user to send messages \n\n-**Allow Sensei to read messages and add reactions to all the channels which you wish to be starred**\n**In starboard channel remember to allow Sensei to**  : \n`send messages` , `manage messages ` , `embed links` , `attach files` ,\n`read message history` , `add reactions` , `use external emojis`\n\n **VIDEOS CANNOT BE STARRED** "
         embed4.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
         embed4.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
 
@@ -129,7 +129,7 @@ class chat(commands.Cog):
           print(summ)
           summ1=146003
           print('Yare Yare Dazei')
-          await self.bot.change_presence(activity=Game(name=f's-info | Supporting {summ} members.'))
+          await self.bot.change_presence(activity=Game(name=f's-help | Supporting {summ} members.'))
           await ctx.send(summ)
           sum=0
         else:

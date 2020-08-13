@@ -6,7 +6,7 @@ from discord.utils import get
 from discord import Embed
 import sqlite3
 
-bot = commands.Bot(command_prefix='s-')
+bot = commands.Bot(command_prefix='s-',help_command=None)
 initial_extensions = [
     'cogs.music',
     'cogs.chat',
@@ -20,7 +20,7 @@ if __name__ == '__main__':
 @bot.event #h
 async def on_ready():
     print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}')
-    await bot.change_presence(activity=Game(name='s-info'))
+    await bot.change_presence(activity=Game(name='s-help'))
     print(f'Bot is ready!')    
 
 @bot.event
@@ -32,10 +32,10 @@ async def on_raw_reaction_add(ctx):
         gid=ctx.guild_id
         conn=sqlite3.connect('starboard.db')
         c=conn.cursor()
-        print('b')
         c.execute('SELECT * FROM sb WHERE guildid = ?',(gid,))
         ex=c.fetchone()
         if not ex is None:
+         print('b')
          guid,chid,sco=ex
          if not ch==bot.get_channel(chid):
             e=Embed(color=0xffdd54)
