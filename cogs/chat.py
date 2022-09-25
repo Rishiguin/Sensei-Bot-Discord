@@ -61,7 +61,7 @@ class chat(commands.Cog):
 
         music1=['song','songplay','listening','listeningall','moods','genres','spotify','play','skip','resume','pause','disconnect','remove']
         chat1=['poll','urban','idea','joke','meme','makenews','twitchgame','twitchstreamer']
-        starb=['starboard_add']
+        starb=['starboard_add','starboard_remove']
 
         for i1 in music1:
             m=m+'`{}`'.format(i1)+' | '
@@ -110,7 +110,7 @@ class chat(commands.Cog):
         embed2.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
         embed2.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
 
-        embed4.description="*A starboard is a popular feature in bots that serve as a channel of messages that users of the server find funny, stupid, or both! \nThe members react to a message they like and if it gets as many stars as set in the command then it goes to starboard*\n\nCreate a starboard in your server by using command : \n`s-starboard_add [channel name] [stars required for starboard]`\n\nExample : `s-starboard_add #starboard 3` \n\n-Update the channel or starcount requirement by using this same command\n\n-It is recommended to set starboard channel to some channel which does not allow user to send messages \n\n-**Allow Sensei to read messages and add reactions to all the channels which you wish to be starred**\n**In starboard channel remember to allow Sensei to**  : \n`send messages` , `manage messages ` , `embed links` , `attach files` ,\n`read message history` , `add reactions` , `use external emojis`\n\n **VIDEOS CANNOT BE STARRED** "
+        embed4.description="*A starboard is a popular feature in bots that serve as a channel of messages that users of the server find funny, stupid, or both! \nThe members react to a message they like and if it gets as many stars as set in the command then it goes to starboard*\n\nCreate a starboard in your server by using command : \n`s-starboard_add [channel name] [stars required for starboard]`\n\nRemove a channel from being starboard by using `s-starboard_remove [#channel name]\n\nExample : `s-starboard_add #starboard 3` \n\n-Update the channel or starcount requirement by using this same command\n\n-It is recommended to set starboard channel to some channel which does not allow user to send messages \n\n-**Allow Sensei to read messages and add reactions to all the channels which you wish to be starred**\n**In starboard channel remember to allow Sensei to**  : \n`send messages` , `manage messages ` , `embed links` , `attach files` ,\n`read message history` , `add reactions` , `use external emojis`\n\n **VIDEOS CANNOT BE STARRED** "
         embed4.add_field(name='-',value=f"[invite me](https://discord.com/api/oauth2/authorize?client_id=732342819510812713&permissions=37223488&scope=bot)",inline=True)
         embed4.add_field(name='-',value=f"[support server](https://discord.gg/EYQrwpy)",inline=True)
 
@@ -560,6 +560,37 @@ class chat(commands.Cog):
          text = "Sorry {}, you do not have permissions to do that!".format(ctx.message.author)
          await ctx.send(ctx.message.channel, text)
 
+    @commands.command(aliases=['sb_remove'])
+    @has_permissions(manage_channels=True)
+    async def starboard_remove(self,ctx,channel_mention):
+      cid=int(channel_mention.replace('<','').replace('>','').replace('#','').replace('@','').strip())
+      gid=ctx.message.guild.id
+      conn = sqlite3.connect('starboard.db')
+      c=conn.cursor()
+
+      c.execute("SELECT * FROM sb WHERE guildid= ? AND channelid= ?",(gid,cid))
+      exist=c.fetchone()     
+        
+      if not exist is None:
+        c.execute("DELETE from sb where channelid=?",(cid,)) 
+        conn.commit()
+        conn.close()
+        await ctx.send('**STARBOARD CHANNEL REMOVED**')
+      else:
+        conn.close()
+        await ctx.send('**STARBOARD SERVER OR CHANNEL NOT IN DATABASE**')
+
+    @commands.command()
+    async def get_servers(self,ctx):
+      conn = sqlite3.connect('starboard.db')
+      c=conn.cursor()
+
+      c.execute("SELECT guildid from sb")
+      guilds=c.fetchall()
+      print(guilds)
+      for g in guilds:
+        await ctx.send(self.bot.get_guild(g[0]))
+      conn.close()
 
 def setup(bot):
     bot.add_cog(chat(bot))
