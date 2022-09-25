@@ -21,9 +21,11 @@ def definition(m):
     for i in range (0,m):
      d=data['list'][m]['definition'].replace('[','').replace(']','')
      print(d)
+     
 def example(n):
     d=data['list'][{n}]['example'].replace('[','').replace(']','')
-    return(m)
+    return(d)
+    
 if __name__ == "__main__":
     definition(3)
 #print(data)
