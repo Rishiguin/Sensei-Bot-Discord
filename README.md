@@ -15,6 +15,8 @@ This bot includes :
 - A youtube search system (search from links or key-words)
 - A pretty message system (automatic current song display and deletion)
 
+![Sensei Bot](https://top.gg/_next/image?url=https%3A%2F%2Fimages.discordapp.net%2Favatars%2F732342819510812713%2Fe7b7dda4d9215fbe8ee12504c91f196e.png%3Fsize%3D128&w=256&q=75)
+
 # Libraries' version:
 - discord.py → 1.3.4
 - discord → 1.0.1
