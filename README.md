@@ -1,6 +1,6 @@
 ### Bot Link (https://top.gg/bot/732342819510812713) 
-##Served More than 100 servers and 10,000 users at peak 
-###(⚠️Now Deactivated⚠️) 
+## Served More than 100 servers and 10,000 users at peak 
+### (⚠️Now Deactivated⚠️) 
 
 # Simple discord music discord bot
 This bot was made with python (3.8.0) and discord.py@rewrite. It includes:
