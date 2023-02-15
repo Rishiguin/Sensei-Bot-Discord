@@ -1,3 +1,7 @@
+## Bot Link (https://top.gg/bot/732342819510812713) 
+Served More than 100 servers and 10,000 users at peak 
+(⚠️Now Deactivated⚠️) 
+
 # Simple discord music discord bot
 This bot was made with python (3.8.0) and discord.py@rewrite. It includes:
 - Chat commands (!poke, !clear, !roll, !toss, !help, !poll, !meme)
@@ -21,7 +25,8 @@ This bot includes :
 - websockets → 8.1
 - FFmpeg → 4.2.3
 
-## Bot Link (https://top.gg/bot/732342819510812713) Served More than 100 servers and 10,000 users at peak 
+## Bot Link (https://top.gg/bot/732342819510812713) 
+Served More than 100 servers and 10,000 users at peak 
 (⚠️Now Deactivated⚠️) 
 
 Add FFmpeg to path when you download it (https://www.youtube.com/watch?v=a_KqycyErd8).
