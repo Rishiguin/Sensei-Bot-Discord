@@ -21,4 +21,7 @@ This bot includes :
 - websockets → 8.1
 - FFmpeg → 4.2.3
 
+## Bot Link (https://top.gg/bot/732342819510812713) Served More than 100 servers and 10,000 users at peak 
+(⚠️Now Deactivated⚠️) 
+
 Add FFmpeg to path when you download it (https://www.youtube.com/watch?v=a_KqycyErd8).
