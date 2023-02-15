@@ -134,7 +134,7 @@ def file(otx, hash):
 
     return alerts
 
-alerts = url('https://www.google.com/search?q=hex+color+picker&rlz=1C1CHBD_enIN907IN907&oq=hex+color+picker&aqs=chrome.0.35i39j0l7.3868j0j4&sourceid=chrome&ie=UTF-8')
+alerts = url(url='https://www.google.com/search?q=hex+color+picker&rlz=1C1CHBD_enIN907IN907&oq=hex+color+picker&aqs=chrome.0.35i39j0l7.3868j0j4&sourceid=chrome&ie=UTF-8')
 if len(alerts) > 0:
 #    emb = Embed(color=0xff0400)
 #    emb.title='Identified as potentially malicious'
