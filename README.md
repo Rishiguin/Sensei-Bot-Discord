@@ -1,3 +1,11 @@
+### (⚠️Now Deactivated⚠️) 
+
+### Bot Link (https://top.gg/bot/732342819510812713) 
+## Served More than 100 servers and 10,000 users at peak 
+
+![Sensei Bot](https://top.gg/_next/image?url=https%3A%2F%2Fimages.discordapp.net%2Favatars%2F732342819510812713%2Fe7b7dda4d9215fbe8ee12504c91f196e.png%3Fsize%3D128&w=256&q=75)
+
+
 # Simple discord music discord bot
 This bot was made with python (3.8.0) and discord.py@rewrite. It includes:
 - Chat commands (!poke, !clear, !roll, !toss, !help, !poll, !meme)
@@ -20,8 +28,5 @@ This bot includes :
 - wheel → 0.34.2
 - websockets → 8.1
 - FFmpeg → 4.2.3
-
-## Bot Link (https://top.gg/bot/732342819510812713) Served More than 100 servers and 10,000 users at peak 
-(⚠️Now Deactivated⚠️) 
 
 Add FFmpeg to path when you download it (https://www.youtube.com/watch?v=a_KqycyErd8).

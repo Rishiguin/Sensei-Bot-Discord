@@ -17,7 +17,7 @@ import os
 from gtts import gTTS
 import pyttsx3
 
-clm=SpotifyClientCredentials(client_id='8fc65af3d87a44f7b9cd241c4e967e13',client_secret='8015fab9a7384427b4eefa5886403ebf')
+clm=SpotifyClientCredentials(client_id='spottify id',client_secret='spottify secrret')
 sp=spotipy.Spotify(client_credentials_manager=clm)
 
 items={
