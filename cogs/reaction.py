@@ -8,7 +8,7 @@ import sqlite3
 from config import botkey
 
 
-async def reaction_func():
+async def reaction_func(bot,ctx):
     if ctx.emoji.name == "⭐":
         ch = bot.get_channel(ctx.channel_id)
         message = await ch.fetch_message(ctx.message_id)
